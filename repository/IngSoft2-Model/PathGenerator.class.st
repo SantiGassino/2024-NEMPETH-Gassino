@@ -27,7 +27,7 @@ PathGenerator >> createWormhole [
 	
 	| wormholeOne wormholeTwo |
 	
-	wormholeOne := Wormhole new.
+	wormholeOne := Wormhole  new.
 	wormholeTwo := Wormhole new.
 
 	wormholeOne associateWith: wormholeTwo.
