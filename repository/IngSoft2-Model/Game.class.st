@@ -283,6 +283,21 @@ Game >> removeSpeedWith: anIdOfSpaceship [
 ]
 
 { #category : #'as yet unclassified' }
+Game >> reverseSpaceshipsTurns [
+
+	spaceships := spaceships reverse.
+]
+
+{ #category : #'as yet unclassified' }
+Game >> skipActualTurn [
+	
+	|skipSpaceship|
+	
+	skipSpaceship := spaceships removeFirst.
+	spaceships add: skipSpaceship.
+]
+
+{ #category : #'as yet unclassified' }
 Game >> spaceshipExistValidation: idOfSpaceship [
 
 	(self checkRanking includes: idOfSpaceship) ifFalse: [

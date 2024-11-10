@@ -27,7 +27,7 @@ Spaceship >> > aSpaceship [
 		  ifTrue: [ true ]
 		  ifFalse: [
 			  self lapsCompleted = aSpaceship lapsCompleted
-				  ifTrue: [ self position > aSpaceship position ]
+				  ifTrue: [ self position >= aSpaceship position ]
 				  ifFalse: [ false ] ]
 ]
 
