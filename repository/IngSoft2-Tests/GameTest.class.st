@@ -2401,3 +2401,58 @@ GameTest >> test053WhenASkipCardIsPlayThenActualSpaceshipLoseHisTurn [
 		assert: aGame checkPositionsOfSpaceships equals: (OrderedCollection with: 1 with: 2 with: 1)
 	
 ]
+
+{ #category : #tests }
+GameTest >> test054WhenADoubleCardIsPlayThenActualSpaceshipPlaysTwoTimes [
+
+	| dices aDie cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aPath aBoard aGame cardArguments |
+	aDie := LoadedDie of: 10.
+	aDie add: (OrderedCollection with: 1).
+	dices := OrderedCollection with: aDie.
+
+	cards := { (1 -> Double ) } asDictionary.
+	aDeck := LoadedDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 1.
+
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 1.
+	cardArguments at: 'idCardToUse' put: 1.
+	
+	aGame playCard: cardArguments.
+
+	aGame playTurn.
+	
+	self
+		assert: aGame checkPositionsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 1).
+		
+	aGame playTurn.
+	
+	self
+		assert: aGame checkPositionsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 1).
+		
+	aGame playTurn.
+		
+	self
+		assert: aGame checkPositionsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 2).
+
+]

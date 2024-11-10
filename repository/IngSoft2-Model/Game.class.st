@@ -10,7 +10,8 @@ Class {
 		'lastCardPlayed',
 		'movementByAcceleration',
 		'lastBox',
-		'board'
+		'board',
+		'repeatTurn'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -66,6 +67,14 @@ Game >> addPermanentCardPlayed: aCard [
 ]
 
 { #category : #'as yet unclassified' }
+Game >> adjustToQueueThe: actualSpaceship [
+
+	repeatTurn 
+    ifTrue: [ spaceships addFirst: actualSpaceship. self changeRepeatState.]
+    ifFalse: [ spaceships add: actualSpaceship ].
+]
+
+{ #category : #'as yet unclassified' }
 Game >> applyMercenary: idOfMercenarySpaceship to: idOfActualSpaceship [
 
 	| mercenarySpaceship actualSpaceship |
@@ -106,6 +115,12 @@ Game >> applySpeedWith: anIdOfSpaceship [
 		                     aSpaceship id = anIdOfSpaceship ].
 	affectedSpaceship addSpeed.
 	lastCardPlayed := Speed
+]
+
+{ #category : #'as yet unclassified' }
+Game >> changeRepeatState [
+	
+	repeatTurn := repeatTurn not.
 ]
 
 { #category : #'as yet unclassified' }
@@ -184,6 +199,7 @@ Game >> initializeWith: numberOfSpaceships and: aCollectionOfDices and: aDeck an
 	board := aBoard.
 	lapsToWin := amountOfLapsToWin.
 	lastBox := NormalBox new.
+	repeatTurn := false.
 	spaceships := self createSpaceships: numberOfSpaceships.
 ]
 
@@ -239,7 +255,8 @@ Game >> playTurn [
 	boxToCheck := board findBoxIn: actualSpaceship position.
 	lastBox := boxToCheck.
 	boxToCheck applyEffect: spaceships and: actualSpaceship.
-	spaceships add: actualSpaceship.
+	
+	self adjustToQueueThe: actualSpaceship.
 
 	board normalizeAll: spaceships.
 
