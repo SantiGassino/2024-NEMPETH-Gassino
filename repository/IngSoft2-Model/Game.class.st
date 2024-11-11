@@ -9,7 +9,6 @@ Class {
 		'permanentCardsPlayed',
 		'lastCardPlayed',
 		'movementByAcceleration',
-		'lastBox',
 		'board',
 		'repeatTurn'
 	],
@@ -98,7 +97,7 @@ Game >> applyRepeat: idOfTargetSpaceship [
 	index := spaceships indexOf: affectedSpaceship.
 	spaceships removeAt: index.
 	
-	lastBox applyEffect: spaceships and: affectedSpaceship.
+	(board getLastBox) applyEffect: spaceships and: affectedSpaceship.
 	
 	spaceships add: affectedSpaceship beforeIndex: index.
 	board normalizeAll: spaceships.
@@ -198,7 +197,6 @@ Game >> initializeWith: numberOfSpaceships and: aCollectionOfDices and: aDeck an
 	deck := aDeck.
 	board := aBoard.
 	lapsToWin := amountOfLapsToWin.
-	lastBox := NormalBox new.
 	repeatTurn := false.
 	spaceships := self createSpaceships: numberOfSpaceships.
 ]
@@ -253,7 +251,6 @@ Game >> playTurn [
 	board normalizeOne: actualSpaceship.
 
 	boxToCheck := board findBoxIn: actualSpaceship position.
-	lastBox := boxToCheck.
 	boxToCheck applyEffect: spaceships and: actualSpaceship.
 	
 	self adjustToQueueThe: actualSpaceship.

@@ -2,7 +2,8 @@ Class {
 	#name : #Board,
 	#superclass : #Object,
 	#instVars : [
-		'path'
+		'path',
+		'lastBox'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -24,14 +25,22 @@ Board class >> lengthValidation: aPath [
 
 { #category : #'as yet unclassified' }
 Board >> findBoxIn:  aPosition [
+	
+	lastBox := path at: aPosition.
+	^ lastBox
+]
 
-	^ path at: aPosition
+{ #category : #'as yet unclassified' }
+Board >> getLastBox [
+
+	^ lastBox
 ]
 
 { #category : #initialization }
 Board >> initializeWith: aPath [
 	
 	path := aPath.
+	lastBox := NormalBox new.
 	path withIndexDo: [ :box :index | box position: index ].
 ]
 
