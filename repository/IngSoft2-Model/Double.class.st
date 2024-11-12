@@ -7,5 +7,5 @@ Class {
 { #category : #initialization }
 Double >> applyCardEffect: aCardArguments and: aGame [ 
 	
-	aGame changeRepeatState.
+	aGame useSpaceshipsManagerTo changeRepeatState.
 ]

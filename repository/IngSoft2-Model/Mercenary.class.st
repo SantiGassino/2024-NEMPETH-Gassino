@@ -15,7 +15,7 @@ Mercenary >> applyCardEffect: aCardArguments and: aGame [
 	idOfActualSpaceship := aCardArguments at: 'idSpaceship'.
 	idOfMercenarySpaceship := aCardArguments at: 'idTargetSpaceship'.
 
-	idOfSpaceshipAtTurn := aGame getIdOfSpaceshipAtTurn.
+	idOfSpaceshipAtTurn := aGame useSpaceshipsManagerTo getIdOfSpaceshipAtTurn.
 	self
 		permanentCardValidationWith: idOfActualSpaceship
 		and: idOfSpaceshipAtTurn.

@@ -7,5 +7,5 @@ Class {
 { #category : #initialization }
 Skip >> applyCardEffect: aCardArguments and: aGame [ 
 
-	aGame skipActualTurn.
+	aGame useSpaceshipsManagerTo skipActualTurn.
 ]
