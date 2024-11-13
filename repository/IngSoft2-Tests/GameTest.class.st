@@ -43,7 +43,7 @@ GameTest >> test001WhenSpaceshipsMovesThreeBoxesOnAThreeBoxesBoardWithOneLapToWi
 
 	aGame playTurn.
 
-	winner := aGame useSpaceshipsManagerTo checkWinner.
+	winner := aGame requestToCheckWinner.
 
 	self assert: winner id equals: 1
 ]
@@ -115,7 +115,7 @@ GameTest >> test003WhenSpaceshipsCompleteTwoLapsOnATwoLapCompletedGameThenTheSpa
 	aGame playTurn.
 	aGame playTurn.
 
-	winner := aGame useSpaceshipsManagerTo checkWinner.
+	winner := aGame requestToCheckWinner.
 
 	self assert: winner id equals: 1
 ]
@@ -195,7 +195,7 @@ GameTest >> test007WhenASpaceshipWinsThenPositionOfAnotherSpaceshipIsOne [
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 1)
 ]
 
@@ -249,7 +249,7 @@ GameTest >> test008WhenGameEndedThenReturnTheFinishSpaceshipPositionOnBoard [
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 3)
 ]
 
@@ -338,7 +338,7 @@ GameTest >> test011WhenSpaceshipsMoveThreeBoxesThenASpaceshipWins [
 
 	aGame playTurn.
 
-	winner := aGame useSpaceshipsManagerTo checkWinner.
+	winner := aGame requestToCheckWinner.
 
 	self assert: winner id equals: 1
 ]
@@ -379,7 +379,7 @@ GameTest >> test014WhenSpaceshipMoveToAPositionWhereThereIsNotAnotherSpaceshipTh
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkShieldsOfSpaceships
+		assert: aGame requestToCheckShieldsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 3)
 ]
 
@@ -420,7 +420,7 @@ GameTest >> test015WhenTwoSpaceshipsBattleIfThereIsATieThenTheSecondSpaceshipLos
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 1)
 ]
 
@@ -457,11 +457,11 @@ GameTest >> test016WhenBothSpaceshipsAreInPositionOneThenTheSpaceshipsAreNotAffe
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 1).
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkShieldsOfSpaceships
+		assert: aGame requestToCheckShieldsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 3)
 ]
 
@@ -507,16 +507,16 @@ GameTest >> test017WhenPassTurnThenTheSpaceshipRecoverAllShields [
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 2).
 	self
-		assert: aGame useSpaceshipsManagerTo checkShieldsOfSpaceships
+		assert: aGame requestToCheckShieldsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 3).
 
 	aGame passTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkShieldsOfSpaceships
+		assert: aGame requestToCheckShieldsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 3)
 ]
 
@@ -561,23 +561,23 @@ GameTest >> test018WhenPassTurnThenTheSpaceshipStaysOnTheSamePlace [
 
 	aGame playTurn.
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 1).
 	aGame playTurn.
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 3).
 	aGame playTurn.
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 4 with: 3).
 	aGame passTurn.
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 4 with: 3).
 	aGame playTurn.
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 5 with: 3)
 ]
 
@@ -626,7 +626,7 @@ GameTest >> test019CheckTheRankingOfSpaceshipsInTheGame [
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkRanking
+		assert: aGame requestToCheckRanking
 		equals: (OrderedCollection with: 2 with: 3 with: 1)
 ]
 
@@ -667,7 +667,7 @@ GameTest >> test020CanNotBattleAfterASpaceshipHasWon [
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 3)
 ]
 
@@ -710,7 +710,7 @@ GameTest >> test021WhenOnABattleTheSpaceshipsThrowTheSameThenTheOneWhichArrivedL
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 1)
 ]
 
@@ -750,7 +750,7 @@ GameTest >> test022SpaceshipsStartWithTwoCardsWhenGameStarts [
 		         andLapsToWin: 1.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkAmountOfCardsOfSpaceships
+		assert: aGame requestToCheckAmountOfCardsOfSpaceships
 		equals: (OrderedCollection
 				 with: 2
 				 with: 2
@@ -871,19 +871,19 @@ GameTest >> test025WhenAnAccelerationCardIsPlayedThenAllThrowsIncreaseByOne [
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkAmountOfCardsOfSpaceships
+		assert: aGame requestToCheckAmountOfCardsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 2).
 
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 1).
 
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 4).
 
 	self assert: aGame getPermanentCardPlayed size equals: 1
@@ -928,19 +928,19 @@ GameTest >> test026WhenAnSpeedCardIsPlayedThenTheAffectedSpaceshipThrowsIncrease
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkAmountOfCardsOfSpaceships
+		assert: aGame requestToCheckAmountOfCardsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 2).
 
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 1).
 
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 4).
 
 	self assert: aGame getPermanentCardPlayed size equals: 1
@@ -985,19 +985,19 @@ GameTest >> test027WhenAnCancelationCardIsPlayedAndTheAffectedCardIsSpeedThenThe
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkAmountOfCardsOfSpaceships
+		assert: aGame requestToCheckAmountOfCardsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 2).
 
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 1).
 
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 4).
 
 	self assert: aGame getPermanentCardPlayed size equals: 1.
@@ -1010,19 +1010,19 @@ GameTest >> test027WhenAnCancelationCardIsPlayedAndTheAffectedCardIsSpeedThenThe
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkAmountOfCardsOfSpaceships
+		assert: aGame requestToCheckAmountOfCardsOfSpaceships
 		equals: (OrderedCollection with: 0 with: 2).
 
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 4).
 
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 2).
 
 	self assert: aGame getPermanentCardPlayed size equals: 0
@@ -1068,19 +1068,19 @@ GameTest >> test028WhenAnCancelationCardIsPlayedAndTheAffectedCardIsAcceleration
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkAmountOfCardsOfSpaceships
+		assert: aGame requestToCheckAmountOfCardsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 2).
 
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 1).
 
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 5).
 
 	self assert: aGame getPermanentCardPlayed size equals: 1.
@@ -1093,19 +1093,19 @@ GameTest >> test028WhenAnCancelationCardIsPlayedAndTheAffectedCardIsAcceleration
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkAmountOfCardsOfSpaceships
+		assert: aGame requestToCheckAmountOfCardsOfSpaceships
 		equals: (OrderedCollection with: 0 with: 2).
 
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 4 with: 5).
 
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 4 with: 3).
 
 	self assert: aGame getPermanentCardPlayed size equals: 0
@@ -1150,14 +1150,14 @@ GameTest >> test029WhenAnMercenaryCardIsPlayedThenAlliedSpaceshipsNotFight [
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkAmountOfCardsOfSpaceships
+		assert: aGame requestToCheckAmountOfCardsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 2 with: 2).
 
 	aGame playTurn.
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 2 with: 1)
 ]
 
@@ -1206,7 +1206,7 @@ GameTest >> test030WhenAMercenaryCardIsPlayedSpaceshipAndHisAlliedLoseThenLoseOn
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkAmountOfCardsOfSpaceships
+		assert: aGame requestToCheckAmountOfCardsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 2 with: 2).
 
 	aGame playTurn.
@@ -1214,11 +1214,11 @@ GameTest >> test030WhenAMercenaryCardIsPlayedSpaceshipAndHisAlliedLoseThenLoseOn
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 3 with: 2).
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkShieldsOfSpaceships
+		assert: aGame requestToCheckShieldsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 2 with: 3)
 ]
 
@@ -1269,7 +1269,7 @@ GameTest >> test031WhenAnCancelationCardIsPlayedAndTheAffectedCardIsMercenaryThe
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkAmountOfCardsOfSpaceships
+		assert: aGame requestToCheckAmountOfCardsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 2 with: 2).
 
 	aGame playTurn.
@@ -1277,11 +1277,11 @@ GameTest >> test031WhenAnCancelationCardIsPlayedAndTheAffectedCardIsMercenaryThe
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 3 with: 2).
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkShieldsOfSpaceships
+		assert: aGame requestToCheckShieldsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 2 with: 3).
 
 	cardArguments := Dictionary new.
@@ -1292,7 +1292,7 @@ GameTest >> test031WhenAnCancelationCardIsPlayedAndTheAffectedCardIsMercenaryThe
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkAmountOfCardsOfSpaceships
+		assert: aGame requestToCheckAmountOfCardsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 1 with: 2).
 
 	aGame playTurn.
@@ -1300,10 +1300,10 @@ GameTest >> test031WhenAnCancelationCardIsPlayedAndTheAffectedCardIsMercenaryThe
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 1 with: 1).
 	self
-		assert: aGame useSpaceshipsManagerTo checkShieldsOfSpaceships
+		assert: aGame requestToCheckShieldsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 2 with: 1)
 ]
 
@@ -1348,7 +1348,7 @@ GameTest >> test032WhenARepeatCardIsPlayAndLastBoxIsNormalBoxThenNoEffectApplied
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 3)
 ]
 
@@ -1395,7 +1395,7 @@ GameTest >> test033WhenARepeatCardIsPlayAndLastBoxIsBlackholeThenTheAffectedSpac
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 2)
 ]
 
@@ -1442,11 +1442,11 @@ GameTest >> test034WhenARepeatCardIsPlayAndLastBoxIsHyperSpaceJumpThenTheAffecte
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 6).
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkShieldsOfSpaceships
+		assert: aGame requestToCheckShieldsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 2)
 ]
 
@@ -1493,7 +1493,7 @@ GameTest >> test035WhenARepeatCardIsPlayAndLastBoxIsMoonWalkThenTheAffectedSpace
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 2)
 ]
 
@@ -1538,18 +1538,18 @@ GameTest >> test036WhenARepeatCardIsPlayAndLastBoxIsAtomicbombThenAllSpaceshipLo
 	aGame playTurn.
 	aGame playTurn.
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 1).
 	self
-		assert: aGame useSpaceshipsManagerTo checkShieldsOfSpaceships
+		assert: aGame requestToCheckShieldsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 2).
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 1).
 	self
-		assert: aGame useSpaceshipsManagerTo checkShieldsOfSpaceships
+		assert: aGame requestToCheckShieldsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 1)
 ]
 
@@ -1600,7 +1600,7 @@ GameTest >> test037WhenARepeatCardIsPlayAndLastBoxIsHyperJumpThenTheAffectedSpac
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 6 with: 5)
 ]
 
@@ -1655,7 +1655,7 @@ GameTest >> test038WhenARedoCardIsPlayAndLastCardIsSpeedCardThenTheAffectedSpace
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 4)
 ]
 
@@ -1709,7 +1709,7 @@ GameTest >> test039WhenARedoCardIsPlayAndLastCardIsAccelerationCardThenAllSpaces
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 4 with: 5).
 
 	self assert: aGame getPermanentCardPlayed size equals: 2
@@ -1780,14 +1780,14 @@ GameTest >> test040WhenARedoCardIsPlayAndLastCardIsCancellationCardThenRemoveThe
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 5).
 
 	aGame playTurn.
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 4 with: 3).
 
 	self assert: aGame getPermanentCardPlayed size equals: 0
@@ -1833,7 +1833,7 @@ GameTest >> test041WhenARedoCardIsPlayAndLastCardIsRepeatCardThenSpaceshipTarget
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 4 with: 2).
 
 	cardArguments := Dictionary new.
@@ -1849,7 +1849,7 @@ GameTest >> test041WhenARedoCardIsPlayAndLastCardIsRepeatCardThenSpaceshipTarget
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 1 with: 1).
 
 	self assert: aGame getPermanentCardPlayed size equals: 0
@@ -1908,18 +1908,18 @@ GameTest >> test042WhenARedoCardIsPlayAndLastCardIsMercenaryCardThenSpaceshipGet
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 2 with: 3).
 	self
-		assert: aGame useSpaceshipsManagerTo checkShieldsOfSpaceships
+		assert: aGame requestToCheckShieldsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 3 with: 3).
 
 	aGame playTurn.
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 2 with: 1).
 	self
-		assert: aGame useSpaceshipsManagerTo checkShieldsOfSpaceships
+		assert: aGame requestToCheckShieldsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 3 with: 2).
 
 	self assert: aGame getPermanentCardPlayed size equals: 2
@@ -1967,11 +1967,11 @@ GameTest >> test043WhenASpaceshipIsInACardBoxThenGetsACard [
 	aGame playTurn.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 3 with: 4).
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkAmountOfCardsOfSpaceships
+		assert: aGame requestToCheckAmountOfCardsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 2 with: 3)
 ]
 
@@ -2335,19 +2335,19 @@ GameTest >> test052WhenAReverseCardIsPlayThenSpaceshipsTurnsChangeAndLastSpacesh
 
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkRanking 
+		assert: aGame requestToCheckRanking 
 		equals: (OrderedCollection with: 1 with: 2 with: 3 with: 4).
 		
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkRanking 
+		assert: aGame requestToCheckRanking 
 		equals: (OrderedCollection with: 4 with: 3 with: 2 with: 1).
 	
 	aGame playTurn.
 	
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships equals: (OrderedCollection with: 1 with: 1 with: 1 with: 2).
+		assert: aGame requestToCheckPositionsOfSpaceships equals: (OrderedCollection with: 1 with: 1 with: 1 with: 2).
 	
 ]
 
@@ -2386,19 +2386,19 @@ GameTest >> test053WhenASkipCardIsPlayThenActualSpaceshipLoseHisTurn [
 
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkRanking 
+		assert: aGame requestToCheckRanking 
 		equals: (OrderedCollection with: 1 with: 2 with: 3).
 		
 	aGame playCard: cardArguments.
 
 	self
-		assert: aGame useSpaceshipsManagerTo checkRanking 
+		assert: aGame requestToCheckRanking 
 		equals: (OrderedCollection with: 2 with: 3 with: 1).
 
 	aGame playTurn.
 	
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships equals: (OrderedCollection with: 1 with: 2 with: 1)
+		assert: aGame requestToCheckPositionsOfSpaceships equals: (OrderedCollection with: 1 with: 2 with: 1)
 	
 ]
 
@@ -2440,19 +2440,19 @@ GameTest >> test054WhenADoubleCardIsPlayThenActualSpaceshipPlaysTwoTimes [
 	aGame playTurn.
 	
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 2 with: 1).
 		
 	aGame playTurn.
 	
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 1).
 		
 	aGame playTurn.
 		
 	self
-		assert: aGame useSpaceshipsManagerTo checkPositionsOfSpaceships
+		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 2).
 
 ]

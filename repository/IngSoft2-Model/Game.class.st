@@ -208,6 +208,60 @@ Game >> removeSpeedWith: anIdOfSpaceship [
 ]
 
 { #category : #'as yet unclassified' }
+Game >> requestIdOfSpaceshipAtTurn [
+	
+	^ spaceshipsManager getIdOfSpaceshipAtTurn.
+]
+
+{ #category : #'as yet unclassified' }
+Game >> requestToChangeRepeatState [
+
+	spaceshipsManager changeRepeatState.
+]
+
+{ #category : #'as yet unclassified' }
+Game >> requestToCheckAmountOfCardsOfSpaceships [
+	
+	^ spaceshipsManager checkAmountOfCardsOfSpaceships.
+]
+
+{ #category : #'as yet unclassified' }
+Game >> requestToCheckPositionsOfSpaceships [
+	
+	^ spaceshipsManager checkPositionsOfSpaceships.
+]
+
+{ #category : #'as yet unclassified' }
+Game >> requestToCheckRanking [
+	
+	^ spaceshipsManager checkRanking.
+]
+
+{ #category : #'as yet unclassified' }
+Game >> requestToCheckShieldsOfSpaceships [
+
+	^ spaceshipsManager checkShieldsOfSpaceships.
+]
+
+{ #category : #'as yet unclassified' }
+Game >> requestToCheckWinner [
+
+	^ spaceshipsManager checkWinner.
+]
+
+{ #category : #'as yet unclassified' }
+Game >> requestToReverseSpaceshipsTurns [
+
+	spaceshipsManager reverseSpaceshipsTurns.
+]
+
+{ #category : #'as yet unclassified' }
+Game >> requestToSkipActualTurn [
+	
+	spaceshipsManager skipActualTurn.
+]
+
+{ #category : #'as yet unclassified' }
 Game >> spaceshipExistValidation: idOfSpaceship [
 
 	(spaceshipsManager checkRanking includes: idOfSpaceship) ifFalse: [
@@ -229,12 +283,6 @@ Game >> throwDices [
 	sum := 0.
 	dices do: [ :die | sum := sum + die throw ].
 	^ sum
-]
-
-{ #category : #accessing }
-Game >> useSpaceshipsManagerTo [
-
-	^ spaceshipsManager
 ]
 
 { #category : #'as yet unclassified' }

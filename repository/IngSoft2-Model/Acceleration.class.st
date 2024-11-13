@@ -9,7 +9,7 @@ Acceleration >> applyCardEffect: aCardArguments and: aGame [
 
 	| idOfSpaceship idOfSpaceshipAtTurn |
 	idOfSpaceship := aCardArguments at: 'idSpaceship'.
-	idOfSpaceshipAtTurn := aGame useSpaceshipsManagerTo getIdOfSpaceshipAtTurn.
+	idOfSpaceshipAtTurn := aGame requestIdOfSpaceshipAtTurn.
 	self
 		permanentCardValidationWith: idOfSpaceship
 		and: idOfSpaceshipAtTurn.

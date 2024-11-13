@@ -7,6 +7,6 @@ Class {
 { #category : #initialization }
 Reverse >> applyCardEffect: aCardArguments and: aGame [ 
 
-	aGame useSpaceshipsManagerTo reverseSpaceshipsTurns.
+	aGame requestToReverseSpaceshipsTurns.
 	
 ]
