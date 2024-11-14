@@ -63,6 +63,13 @@ Spaceship >> changeTo: anState [
 	state := anState.
 ]
 
+{ #category : #accessing }
+Spaceship >> evaluateUpdateRequiredUnlockingAmount: positionsToMoveByDices [
+
+	requiredUnlockingAmount = positionsToMoveByDices ifTrue: [
+		requiredUnlockingAmount := -1 ]
+]
+
 { #category : #'as yet unclassified' }
 Spaceship >> getRequiredUnlockingAmount [
 
@@ -111,7 +118,7 @@ Spaceship >> move: positionsToMoveByDices and: extraMovements [
 	requiredUnlockingAmount = -1
 		ifTrue: [
 		position := position + positionsToMoveByDices + extraMovements ]
-		ifFalse: [ self updateRequiredUnlockingAmount: positionsToMoveByDices ]
+		ifFalse: [ self evaluateUpdateRequiredUnlockingAmount: positionsToMoveByDices ]
 ]
 
 { #category : #accessing }
@@ -178,13 +185,6 @@ Spaceship >> state [
 Spaceship >> subtractLap [
 
 	lapsCompleted := lapsCompleted - 1
-]
-
-{ #category : #accessing }
-Spaceship >> updateRequiredUnlockingAmount: positionsToMoveByDices [
-
-	requiredUnlockingAmount = positionsToMoveByDices ifTrue: [
-		requiredUnlockingAmount := -1 ]
 ]
 
 { #category : #'as yet unclassified' }

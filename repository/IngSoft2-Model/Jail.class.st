@@ -13,7 +13,7 @@ Jail class >> createWith: dices [
 { #category : #initialization }
 Jail >> initializeWith: dices [
 	
-	lockMount := self getMaxValueOfDices: dices.
+	lockAmount := self getMaxValueOfDices: dices.
 	prisioners := OrderedCollection new.
 	
 ]

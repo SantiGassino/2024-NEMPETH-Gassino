@@ -11,14 +11,14 @@ HyperGravity class >> createWith: dices [
 ]
 
 { #category : #initialization }
-HyperGravity >> getLockMount [
+HyperGravity >> getLockAmount [
 	
-	^ lockMount 
+	^ lockAmount 
 ]
 
 { #category : #initialization }
 HyperGravity >> initializeWith: dices [
 
-	lockMount := (1 to: (self getMaxValueOfDices: dices)) atRandom.
+	lockAmount := (1 to: (self getMaxValueOfDices: dices)) atRandom.
 	prisioners := OrderedCollection new
 ]

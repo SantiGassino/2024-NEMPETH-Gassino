@@ -2561,3 +2561,66 @@ GameTest >> test056WhenTwoSpaceshipFallInTheSameLockBoxThenNotFight [
 		assert: aGame requestToCheckShieldsOfSpaceships 
 		equals: (OrderedCollection with: 3 with: 3).
 ]
+
+{ #category : #tests }
+GameTest >> test057WhenSpaceshipFallIntoLockBoxThenSpaceshipCanPassTurnOrPlayTurnAndSpaceshipNotBeReleaseUntilGetTheRequiredAmountOfDices [
+
+	| dices aDie cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aJailbox aPath aBoard aGame |
+	aDie := LoadedDie of: 4.
+	aDie add: (OrderedCollection with: 1 with: 2 with: 1 with: 4 with: 1 ).
+
+	dices := OrderedCollection with: aDie.
+
+	cards := {
+		         (1 -> Redo).
+		         (2 -> Mercenary) } asDictionary.
+	aDeck := LoadedDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aJailbox := Jail createWith: dices.
+
+
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aJailbox
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 3.
+
+	aGame playTurn.
+	aGame playTurn.
+	self
+		assert: aGame requestToCheckPositionsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 3).
+		
+	aGame passTurn. 
+	aGame playTurn. 
+	
+	self
+		assert: aGame requestToCheckPositionsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 4).
+		
+	aGame playTurn. 
+	aGame playTurn.
+	
+	self
+		assert: aGame requestToCheckPositionsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 5).
+		
+	aGame playTurn. 
+
+	self
+		assert: aGame requestToCheckPositionsOfSpaceships
+		equals: (OrderedCollection with: 3 with: 5).
+]
