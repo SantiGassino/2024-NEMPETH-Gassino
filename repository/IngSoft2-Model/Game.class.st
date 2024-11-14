@@ -48,6 +48,18 @@ Game >> addPermanentCardPlayed: aCard [
 ]
 
 { #category : #'as yet unclassified' }
+Game >> applyFreedom: idOfSpaceship [
+	
+	| actualSpaceship |
+	self validationSpaceshipIdAtThisTurnIs: idOfSpaceship.
+	self validationOfJailBox.
+
+	actualSpaceship := (spaceshipsManager getSpaceshipAtThisTurn).
+
+   actualSpaceship setRequiredUnlockingAmount: -1.
+]
+
+{ #category : #'as yet unclassified' }
 Game >> applyMercenary: idOfMercenarySpaceship to: idOfActualSpaceship [
 
 	| mercenarySpaceship actualSpaceship |
@@ -293,4 +305,24 @@ Game >> validation: actualSpaceship hasTheCard: idOfCard [
 		ifTrue: [
 			Error signal:
 				'A spaceship is trying to play a card that does not have' ]
+]
+
+{ #category : #'as yet unclassified' }
+Game >> validationOfJailBox [
+
+	| actualBox |
+	actualBox := board findBoxIn: ((spaceshipsManager getSpaceshipAtThisTurn) position).
+
+	(actualBox isUnlockableByFreedomCard) ifFalse: [
+		Error signal:
+			'A ship is attempting to play a freedom card when it is not in a JailBox' ]
+]
+
+{ #category : #'as yet unclassified' }
+Game >> validationSpaceshipIdAtThisTurnIs: idOfSpaceship [ 
+
+	(spaceshipsManager getIdOfSpaceshipAtTurn = idOfSpaceship)
+		ifFalse: [
+			Error signal:
+				'A ship is attempting to play a freedom card when it is not its turn' ]
 ]

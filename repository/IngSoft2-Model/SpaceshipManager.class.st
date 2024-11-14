@@ -103,6 +103,18 @@ SpaceshipManager >> getIdOfSpaceshipAtTurn [
 ]
 
 { #category : #'as yet unclassified' }
+SpaceshipManager >> getSpaceshipAtThisTurn [
+	
+	| actualSpaceship |
+	
+	actualSpaceship := spaceships removeFirst.
+	spaceships addFirst: actualSpaceship.
+	
+	^ actualSpaceship
+	
+]
+
+{ #category : #'as yet unclassified' }
 SpaceshipManager >> getSpaceships [
 	^ spaceships.
 ]

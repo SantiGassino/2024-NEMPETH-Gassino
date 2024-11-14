@@ -17,3 +17,9 @@ Jail >> initializeWith: dices [
 	prisioners := OrderedCollection new.
 	
 ]
+
+{ #category : #initialization }
+Jail >> isUnlockableByFreedomCard [
+
+	^ true
+]

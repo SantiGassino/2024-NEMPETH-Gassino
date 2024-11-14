@@ -2624,3 +2624,150 @@ GameTest >> test057WhenSpaceshipFallIntoLockBoxThenSpaceshipCanPassTurnOrPlayTur
 		assert: aGame requestToCheckPositionsOfSpaceships
 		equals: (OrderedCollection with: 3 with: 5).
 ]
+
+{ #category : #tests }
+GameTest >> test058WhenSpaceshipPlayAFreedomCardThenCanPlayTurnNormaly [
+
+	| dices aDie cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aJailbox aPath aBoard aGame cardArguments|
+	aDie := LoadedDie of: 4.
+	aDie add: (OrderedCollection with: 1 with: 2).
+
+	dices := OrderedCollection with: aDie.
+
+	cards := { (1 -> Freedom) } asDictionary.
+	aDeck := LoadedDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aJailbox := Jail createWith: dices.
+
+
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aJailbox
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 3.
+
+	aGame playTurn.
+	aGame passTurn.
+
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 1.
+	cardArguments at: 'idCardToUse' put: 1.
+	aGame playCard: cardArguments.
+	
+	self
+		assert: aGame requestToCheckPositionsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 1).
+
+	aGame playTurn.
+
+	self
+		assert: aGame requestToCheckPositionsOfSpaceships
+		equals: (OrderedCollection with: 4 with: 1)
+]
+
+{ #category : #tests }
+GameTest >> test059WhenSpaceshipPlayAFreedomCardAndNotIsItsTurnThenThrowError [
+
+	| dices aDie cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aJailbox aPath aBoard aGame cardArguments |
+	aDie := LoadedDie of: 4.
+	aDie add: (OrderedCollection with: 1 with: 2).
+
+	dices := OrderedCollection with: aDie.
+
+	cards := { (1 -> Freedom). } asDictionary.
+	aDeck := LoadedDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aJailbox := Jail createWith: dices.
+
+
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aJailbox
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 3.
+
+	aGame playTurn.
+	aGame passTurn.
+
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 2.
+	cardArguments at: 'idCardToUse' put: 3.
+	
+	self
+		should: [ aGame playCard: cardArguments ]
+		raise: Error
+		withMessage: 'A ship is attempting to play a freedom card when it is not its turn'
+]
+
+{ #category : #tests }
+GameTest >> test060WhenSpaceshipPlayAFreedomCardAndNotIsInAJailBoxThenThrowError [
+
+	| dices aDie cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aHyperGravitybox aPath aBoard aGame cardArguments |
+	aDie := LoadedDie of: 4.
+	aDie add: (OrderedCollection with: 1 with: 2).
+
+	dices := OrderedCollection with: aDie.
+
+	cards := { (1 -> Freedom). } asDictionary.
+	aDeck := LoadedDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aHyperGravitybox := HyperGravity createWith: dices.
+
+
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aHyperGravitybox
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 3.
+
+	aGame playTurn.
+	aGame passTurn.
+
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 1.
+	cardArguments at: 'idCardToUse' put: 1.
+	
+	self
+		should: [ aGame playCard: cardArguments ]
+		raise: Error
+		withMessage: 'A ship is attempting to play a freedom card when it is not in a JailBox'
+]
