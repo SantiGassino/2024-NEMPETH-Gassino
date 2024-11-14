@@ -18,11 +18,16 @@ MoonWalk >> applyEffect: spaceships and: actualSpaceship [
 
 	spaceships do: [ :aSpaceship |
 		aSpaceship position ~= 1 ifTrue: [
-			aSpaceship move: -1 * boxesToMove ] ]
+			aSpaceship move: 0 and: -1 * boxesToMove ] ]
 ]
 
 { #category : #initialization }
 MoonWalk >> initializeWith: boxesToMoveBackward [
 
 	boxesToMove := boxesToMoveBackward.
+]
+
+{ #category : #accessing }
+MoonWalk >> isLockType [
+	^ false
 ]

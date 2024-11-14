@@ -10,7 +10,8 @@ Class {
 		'cards',
 		'movementBySpeed',
 		'avaliableForMercenary',
-		'mercenaries'
+		'mercenaries',
+		'requiredUnlockingAmount'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -62,6 +63,12 @@ Spaceship >> changeTo: anState [
 	state := anState.
 ]
 
+{ #category : #'as yet unclassified' }
+Spaceship >> getRequiredUnlockingAmount [
+
+	^ requiredUnlockingAmount 
+]
+
 { #category : #accessing }
 Spaceship >> id [
 	^ id
@@ -77,6 +84,7 @@ Spaceship >> initializeWith: anId [
 	position := 1.
 	shield := 3.
 	lapsCompleted := 0.
+	requiredUnlockingAmount := -1.
 	cards := OrderedCollection new.
 	state := AvailableState create
 ]
@@ -98,9 +106,12 @@ Spaceship >> mercenaries [
 ]
 
 { #category : #accessing }
-Spaceship >> move: positionsToMove [
+Spaceship >> move: positionsToMoveByDices and: extraMovements [
 
-	position := position + positionsToMove
+	requiredUnlockingAmount = -1
+		ifTrue: [
+		position := position + positionsToMoveByDices + extraMovements ]
+		ifFalse: [ self updateRequiredUnlockingAmount: positionsToMoveByDices ]
 ]
 
 { #category : #accessing }
@@ -147,6 +158,12 @@ Spaceship >> removeThis: aCard [
 	self cards remove: aCard.
 ]
 
+{ #category : #'as yet unclassified' }
+Spaceship >> setRequiredUnlockingAmount: lockMount [ 
+
+	requiredUnlockingAmount := lockMount.
+]
+
 { #category : #accessing }
 Spaceship >> shield [
 	^ shield
@@ -161,6 +178,13 @@ Spaceship >> state [
 Spaceship >> subtractLap [
 
 	lapsCompleted := lapsCompleted - 1
+]
+
+{ #category : #accessing }
+Spaceship >> updateRequiredUnlockingAmount: positionsToMoveByDices [
+
+	requiredUnlockingAmount = positionsToMoveByDices ifTrue: [
+		requiredUnlockingAmount := -1 ]
 ]
 
 { #category : #'as yet unclassified' }

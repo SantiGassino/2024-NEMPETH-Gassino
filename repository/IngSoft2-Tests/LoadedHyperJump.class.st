@@ -25,7 +25,7 @@ LoadedHyperJump >> addParsecs: aCollectionOfParsecs [
 { #category : #accessing }
 LoadedHyperJump >> applyEffect: spaceships and: affectedSpaceship [
 
-	affectedSpaceship move: ((collectionOfParsecs at: index) toParsec) // parsecsToBoxesRatio .
+	affectedSpaceship move: 0 and: ((collectionOfParsecs at: index) toParsec) // parsecsToBoxesRatio .
 	
 	index = collectionOfParsecs size ifTrue: [
 		index := 0 ].
@@ -39,6 +39,12 @@ LoadedHyperJump >> initializeWith: listLength and: aRatio [
 	index := 1.
 	collectionOfParsecs := OrderedCollection new.
 	parsecsToBoxesRatio := aRatio
+]
+
+{ #category : #accessing }
+LoadedHyperJump >> isLockType [
+
+	^ false
 ]
 
 { #category : #accessing }

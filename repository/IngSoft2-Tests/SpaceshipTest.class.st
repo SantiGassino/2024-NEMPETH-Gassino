@@ -17,8 +17,8 @@ SpaceshipTest >> test003WhenASpaceshipMovesTwoAndFivePositionsThenPositionIsSeve
 
 	| aSpaceship |
 	aSpaceship := Spaceship createWithId: 1.
-	aSpaceship move: 2.
-	aSpaceship move: 5.
+	aSpaceship move: 2 and: 0.
+	aSpaceship move: 5 and: 0.
 	self assert: aSpaceship position equals: 8
 ]
 

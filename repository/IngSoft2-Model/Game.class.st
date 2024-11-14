@@ -157,7 +157,7 @@ Game >> playTurn [
 	actualSpaceship := spaceshipsManager manageTurns.
 
 	actualSpaceship playTurn ifFalse: [ ^ self ].
-	actualSpaceship move: self throwDices + movementByAcceleration
+	actualSpaceship move: self throwDices and: movementByAcceleration
 		+ actualSpaceship movementBySpeed.
 
 	board normalizeOne: actualSpaceship.
@@ -169,8 +169,9 @@ Game >> playTurn [
 
 	winner := spaceshipsManager checkWinner.
 	winner ifNotNil: [ ^ self ].
+	
+	(boxToCheck isLockType) ifFalse: [ spaceshipsManager verifyBattleWith: actualSpaceship and: self. ]
 
-	spaceshipsManager verifyBattleWith: actualSpaceship and: self.
 	
 ]
 

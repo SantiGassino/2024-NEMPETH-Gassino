@@ -82,7 +82,7 @@ BoardTest >> test005ForLoadedBoardWhenASpaceshipPassTheLastBoxThenAddALapComplet
 		         with: anotherBox.
 	aBoard := Board createWith: aPath.
 	
-	aSpaceship move: 6.
+	aSpaceship move: 6 and: 0.
 		
 	aBoard normalizeOne: aSpaceship.
 	
@@ -116,8 +116,8 @@ BoardTest >> test006ForLoadedBoardWhenASpaceshipPassTheLastBoxAndAnotherSpaceshi
 		         with: anotherBox.
 	aBoard := Board createWith: aPath.
 	
-	aSpaceship move: 6.
-	anotherSpaceship move: 3.
+	aSpaceship move: 6 and: 0.
+	anotherSpaceship move: 3 and: 0.
 		
 	aBoard normalizeAll: spaceships.
 	
@@ -153,8 +153,8 @@ BoardTest >> test007ForLoadedBoardCanNotGoBackBeyondFirstBoxOnFirstLap [
 		         with: anotherBox.
 	aBoard := Board createWith: aPath.
 	
-	aSpaceship move: 6.
-	anotherSpaceship move: -3.
+	aSpaceship move: 6 and: 0.
+	anotherSpaceship move: -3 and: 0.
 		
 	aBoard normalizeAll: spaceships.
 	
@@ -190,8 +190,8 @@ BoardTest >> test008ForLoaded8WhenASpaceshipMovesBackThroughFirstBoxThenSubtract
 		         with: anotherBox.
 	aBoard := Board createWith: aPath.
 	
-	aSpaceship move: 6.
-	anotherSpaceship move: 1.
+	aSpaceship move: 6 and: 0.
+	anotherSpaceship move: 1 and: 0.
 		
 	aBoard normalizeAll: spaceships.
 	
@@ -200,8 +200,8 @@ BoardTest >> test008ForLoaded8WhenASpaceshipMovesBackThroughFirstBoxThenSubtract
 	self assert: anotherSpaceship position equals: 2.
 	self assert: anotherSpaceship lapsCompleted equals: 0.
 	
-	aSpaceship move: -3.
-	anotherSpaceship move: -3.
+	aSpaceship move: -3 and: 0.
+	anotherSpaceship move: -3 and: 0.
 		
 	aBoard normalizeAll: spaceships.
 	
@@ -215,7 +215,7 @@ BoardTest >> test008ForLoaded8WhenASpaceshipMovesBackThroughFirstBoxThenSubtract
 { #category : #tests }
 BoardTest >> test010TheFirstBoxOfTheBoardIsANormalBox [
 
-	| aBoard aPathGenerator cards aDeck |
+	| aBoard aPathGenerator cards aDeck aDices|
 	
 	cards := {
         1 -> Acceleration.
@@ -223,7 +223,9 @@ BoardTest >> test010TheFirstBoxOfTheBoardIsANormalBox [
     } asDictionary.
 	aDeck := LoadedDeck createWith: cards.
 	
-	aPathGenerator := PathGenerator createWith: 10 and: 5 and: aDeck. 
+	aDices := OrderedCollection with: (Die of: 3).
+	
+	aPathGenerator := PathGenerator createWith: 10 and: 5 and: aDeck and: aDices. 
 	
 	aBoard := Board createWith: aPathGenerator path.
 
@@ -240,7 +242,7 @@ BoardTest >> test013ForBoardWhenASpaceshipPassTheLastBoxThenAddALapCompletedToSp
 
 	aBoard := Board createWith: aPath.
 	
-	aSpaceship move: 3.
+	aSpaceship move: 3 and: 0.
 		
 	aBoard normalizeOne: aSpaceship.
 	
@@ -262,7 +264,7 @@ BoardTest >> test014ForBoardWhenASpaceshipPassTheLastBoxAndAnotherSpaceshipDoesN
 		
 	aBoard := Board createWith: aPath.
 	
-	aSpaceship move: 3.
+	aSpaceship move: 3 and: 0.
 		
 	aBoard normalizeAll: spaceships.
 	
@@ -286,8 +288,8 @@ BoardTest >> test015ForBoardCanNotGoBackBeyondFirstBoxOnFirstLap [
 		
 	aBoard := Board createWith: aPath.
 	
-	aSpaceship move: 3.
-	anotherSpaceship move: -3.
+	aSpaceship move: 3 and: 0.
+	anotherSpaceship move: -3 and: 0.
 		
 	aBoard normalizeAll: spaceships.
 	
@@ -311,7 +313,7 @@ BoardTest >> test016ForBoardWhenASpaceshipMovesBackThroughFirstBoxThenSubtractOn
 		
 	aBoard := Board createWith: aPath.
 	
-	aSpaceship move: 3.
+	aSpaceship move: 3 and: 0.
 		
 	aBoard normalizeAll: spaceships.
 	
@@ -320,7 +322,7 @@ BoardTest >> test016ForBoardWhenASpaceshipMovesBackThroughFirstBoxThenSubtractOn
 	self assert: anotherSpaceship position equals: 1.
 	self assert: anotherSpaceship lapsCompleted equals: 0.
 	
-	aSpaceship move: -3.
+	aSpaceship move: -3 and: 0.
 		
 	aBoard normalizeAll: spaceships.
 	
