@@ -91,3 +91,14 @@ Board >> normalizeOne: aSpaceship [
 		aSpaceship move: 0 and: -1 * self length.
 		aSpaceship addLap ]
 ]
+
+{ #category : #accessing }
+Board >> validationOfJailBoxAt: actualPosition [
+
+	| actualBox |
+	actualBox := self findBoxIn: actualPosition.
+
+	(actualBox isUnlockableByFreedomCard) ifFalse: [
+		Error signal:
+			'A ship is attempting to play a freedom card when it is not in a JailBox' ]
+]

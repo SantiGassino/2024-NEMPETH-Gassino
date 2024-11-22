@@ -159,6 +159,30 @@ SpaceshipManager >> skipActualTurn [
 	spaceships add: skipSpaceship.
 ]
 
+{ #category : #'as yet unclassified' }
+SpaceshipManager >> spaceshipExistValidation: idOfSpaceship [
+
+	(self checkRanking includes: idOfSpaceship) ifFalse: [
+		Error signal:
+			'The spaceship that wants to play the card does not exist' ]
+]
+
+{ #category : #'as yet unclassified' }
+SpaceshipManager >> targetSpaceshipExistValidation: anIdOfSpaceship [
+
+	(self checkRanking includes: anIdOfSpaceship) ifFalse: [
+		Error signal: 'The target spaceship does not exist' ]
+]
+
+{ #category : #'as yet unclassified' }
+SpaceshipManager >> validationSpaceshipIdAtThisTurnIs: idOfSpaceship [ 
+
+	(self getIdOfSpaceshipAtTurn = idOfSpaceship)
+		ifFalse: [
+			Error signal:
+				'A ship is attempting to play a freedom card when it is not its turn' ]
+]
+
 { #category : #accessing }
 SpaceshipManager >> verifyBattleWith: actualSpaceship and: aGame [
 

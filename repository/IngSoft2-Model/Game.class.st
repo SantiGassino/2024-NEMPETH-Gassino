@@ -51,8 +51,8 @@ Game >> addPermanentCardPlayed: aCard [
 Game >> applyFreedom: idOfSpaceship [
 	
 	| actualSpaceship |
-	self validationSpaceshipIdAtThisTurnIs: idOfSpaceship.
-	self validationOfJailBox.
+	spaceshipsManager validationSpaceshipIdAtThisTurnIs: idOfSpaceship.
+	board validationOfJailBoxAt: ((spaceshipsManager getSpaceshipAtThisTurn) position).
 
 	actualSpaceship := (spaceshipsManager getSpaceshipAtThisTurn).
 
@@ -63,12 +63,13 @@ Game >> applyFreedom: idOfSpaceship [
 Game >> applyMercenary: idOfMercenarySpaceship to: idOfActualSpaceship [
 
 	| mercenarySpaceship actualSpaceship |
-	self targetSpaceshipExistValidation: idOfMercenarySpaceship.
+	spaceshipsManager targetSpaceshipExistValidation: idOfMercenarySpaceship.
 	mercenarySpaceship := spaceshipsManager getSpaceships detect: [ :aSpaceship |
 		                      aSpaceship id = idOfMercenarySpaceship ].
 	actualSpaceship := spaceshipsManager getSpaceships detect: [ :aSpaceship |
 		                   aSpaceship id = idOfActualSpaceship ].
-	self mercenaryAvailabilityValidation: mercenarySpaceship.
+
+	mercenarySpaceship mercenaryAvailabilityValidation.
 
 	actualSpaceship addMercenary: mercenarySpaceship.
 	lastCardPlayed := Mercenary
@@ -78,7 +79,7 @@ Game >> applyMercenary: idOfMercenarySpaceship to: idOfActualSpaceship [
 Game >> applyRepeat: idOfTargetSpaceship [ 
 	
 	| affectedSpaceship index |
-	self targetSpaceshipExistValidation: idOfTargetSpaceship.
+	spaceshipsManager targetSpaceshipExistValidation: idOfTargetSpaceship.
 	affectedSpaceship := spaceshipsManager getSpaceships detect: [ :aSpaceship | aSpaceship id = idOfTargetSpaceship ].
 	index := spaceshipsManager getSpaceships indexOf: affectedSpaceship.
 	spaceshipsManager getSpaceships removeAt: index.
@@ -95,7 +96,7 @@ Game >> applyRepeat: idOfTargetSpaceship [
 Game >> applySpeedWith: anIdOfSpaceship [
 
 	| affectedSpaceship |
-	self targetSpaceshipExistValidation: anIdOfSpaceship.
+	spaceshipsManager targetSpaceshipExistValidation: anIdOfSpaceship.
 	affectedSpaceship := spaceshipsManager getSpaceships detect: [ :aSpaceship |
 		                     aSpaceship id = anIdOfSpaceship ].
 	affectedSpaceship addSpeed.
@@ -125,13 +126,6 @@ Game >> initializeWith: numberOfSpaceships and: aCollectionOfDices and: aDeck an
 ]
 
 { #category : #'as yet unclassified' }
-Game >> mercenaryAvailabilityValidation: mercenarySpaceship [
-
-	mercenarySpaceship isAvaliableForMercenary ifFalse: [
-		Error signal: 'A spaceship chose a mercenary already chosen' ]
-]
-
-{ #category : #'as yet unclassified' }
 Game >> passTurn [
 	
 	| actualSpaceship |
@@ -147,7 +141,7 @@ Game >> playCard: aCardArguments [
 
 	| idOfSpaceship actualSpaceship idOfCard card |
 	idOfSpaceship := aCardArguments at: 'idSpaceship'.
-	self spaceshipExistValidation: idOfSpaceship.
+	spaceshipsManager spaceshipExistValidation: idOfSpaceship.
 
 	actualSpaceship := spaceshipsManager getSpaceships detect: [ :aSpaceship |
 		                   aSpaceship id = idOfSpaceship ].
@@ -275,21 +269,6 @@ Game >> requestToSkipActualTurn [
 ]
 
 { #category : #'as yet unclassified' }
-Game >> spaceshipExistValidation: idOfSpaceship [
-
-	(spaceshipsManager checkRanking includes: idOfSpaceship) ifFalse: [
-		Error signal:
-			'The spaceship that wants to play the card does not exist' ]
-]
-
-{ #category : #'as yet unclassified' }
-Game >> targetSpaceshipExistValidation: anIdOfSpaceship [
-
-	(spaceshipsManager checkRanking includes: anIdOfSpaceship) ifFalse: [
-		Error signal: 'The target spaceship does not exist' ]
-]
-
-{ #category : #'as yet unclassified' }
 Game >> throwDices [
 
 	| sum |
@@ -305,24 +284,4 @@ Game >> validation: actualSpaceship hasTheCard: idOfCard [
 		ifTrue: [
 			Error signal:
 				'A spaceship is trying to play a card that does not have' ]
-]
-
-{ #category : #'as yet unclassified' }
-Game >> validationOfJailBox [
-
-	| actualBox |
-	actualBox := board findBoxIn: ((spaceshipsManager getSpaceshipAtThisTurn) position).
-
-	(actualBox isUnlockableByFreedomCard) ifFalse: [
-		Error signal:
-			'A ship is attempting to play a freedom card when it is not in a JailBox' ]
-]
-
-{ #category : #'as yet unclassified' }
-Game >> validationSpaceshipIdAtThisTurnIs: idOfSpaceship [ 
-
-	(spaceshipsManager getIdOfSpaceshipAtTurn = idOfSpaceship)
-		ifFalse: [
-			Error signal:
-				'A ship is attempting to play a freedom card when it is not its turn' ]
 ]

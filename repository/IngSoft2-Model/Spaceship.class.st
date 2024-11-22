@@ -112,6 +112,13 @@ Spaceship >> mercenaries [
 	^ mercenaries
 ]
 
+{ #category : #'as yet unclassified' }
+Spaceship >> mercenaryAvailabilityValidation [
+
+	self isAvaliableForMercenary ifFalse: [
+		Error signal: 'A spaceship chose a mercenary already chosen' ]
+]
+
 { #category : #accessing }
 Spaceship >> move: positionsToMoveByDices and: extraMovements [
 
