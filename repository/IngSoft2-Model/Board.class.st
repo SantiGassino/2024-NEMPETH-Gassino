@@ -24,10 +24,14 @@ Board class >> lengthValidation: aPath [
 ]
 
 { #category : #'as yet unclassified' }
-Board >> findBoxIn:  aPosition [
-	
-	lastBox := path at: aPosition.
-	^ lastBox
+Board >> findBoxIn: aPosition [
+
+	| actualBox |
+	actualBox := path at: aPosition.
+
+	actualBox isLockType ifFalse: [ lastBox := actualBox ].
+
+	^ actualBox
 ]
 
 { #category : #'as yet unclassified' }
