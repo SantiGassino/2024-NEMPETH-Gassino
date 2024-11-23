@@ -57,6 +57,8 @@ Game >> applyFreedom: idOfSpaceship [
 	actualSpaceship := (spaceshipsManager getSpaceshipAtThisTurn).
 
    actualSpaceship updateStateOfLocking: Unlock new.
+
+	lastCardPlayed := Freedom.
 ]
 
 { #category : #'as yet unclassified' }
@@ -221,9 +223,10 @@ Game >> requestIdOfSpaceshipAtTurn [
 ]
 
 { #category : #'as yet unclassified' }
-Game >> requestToChangeRepeatState [
+Game >> requestToChangeRepeatTurn [
 
-	spaceshipsManager changeRepeatState.
+	spaceshipsManager changeRepeatTurn.
+	lastCardPlayed := Double.
 ]
 
 { #category : #'as yet unclassified' }
@@ -260,12 +263,14 @@ Game >> requestToCheckWinner [
 Game >> requestToReverseSpaceshipsTurns [
 
 	spaceshipsManager reverseSpaceshipsTurns.
+	lastCardPlayed := Reverse.
 ]
 
 { #category : #'as yet unclassified' }
 Game >> requestToSkipActualTurn [
 	
 	spaceshipsManager skipActualTurn.
+	lastCardPlayed := Skip.
 ]
 
 { #category : #'as yet unclassified' }

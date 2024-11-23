@@ -36,12 +36,12 @@ SpaceshipManager class >> spaceshipsValidation: numberOfSpaceships [
 SpaceshipManager >> adjustToQueueThe: actualSpaceship [
 
 	repeatTurn 
-    ifTrue: [ spaceships addFirst: actualSpaceship. self changeRepeatState.]
+    ifTrue: [ spaceships addFirst: actualSpaceship. self changeRepeatTurn.]
     ifFalse: [ spaceships add: actualSpaceship ].
 ]
 
 { #category : #'as yet unclassified' }
-SpaceshipManager >> changeRepeatState [
+SpaceshipManager >> changeRepeatTurn [
 	
 	repeatTurn := repeatTurn not.
 ]
