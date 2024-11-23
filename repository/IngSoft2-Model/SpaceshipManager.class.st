@@ -210,10 +210,10 @@ SpaceshipManager >> verifyBattleWith: actualSpaceship and: aGame [
 	 sumOfThrowsCounterSpaceship >= sumOfThrowsActualSpaceship
 		ifTrue: [
 			actualSpaceship move: 0 and: -1 * actualSpaceship position + 1.
-			actualSpaceship updateShield: -1.
-			actualSpaceship mercenaries do: [ :aMercenary | aMercenary updateShield: -1 ]]
+			actualSpaceship requestToUpdateShield: -1.
+			actualSpaceship mercenaries do: [ :aMercenary | aMercenary requestToUpdateShield: -1 ]]
 		ifFalse: [
 			counterSpaceship move: 0 and: -1 * counterSpaceship position + 1.
-			counterSpaceship updateShield: -1.
-			counterSpaceship mercenaries do: [ :aMercenary | aMercenary updateShield: -1 ]].
+			counterSpaceship requestToUpdateShield: -1.
+			counterSpaceship mercenaries do: [ :aMercenary | aMercenary requestToUpdateShield: -1 ]].
 ]

@@ -8,7 +8,7 @@ Class {
 HyperSpaceJump >> applyEffect: spaceships and: actualSpaceship [
 
 	actualSpaceship move: 0 and: 4.
-	actualSpaceship updateShield: -1
+	actualSpaceship requestToUpdateShield: -1
 ]
 
 { #category : #accessing }

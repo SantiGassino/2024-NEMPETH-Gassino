@@ -2,16 +2,14 @@ Class {
 	#name : #Spaceship,
 	#superclass : #Object,
 	#instVars : [
-		'position',
-		'shield',
 		'lapsCompleted',
 		'state',
 		'id',
 		'cards',
-		'movementBySpeed',
 		'avaliableForMercenary',
 		'mercenaries',
-		'lockState'
+		'lockState',
+		'physicalAttributes'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -41,11 +39,6 @@ Spaceship >> addLap [
 Spaceship >> addMercenary: aSpaceship [
 	mercenaries add: aSpaceship.
 	aSpaceship changeAvailabilityForMercenary.
-]
-
-{ #category : #adding }
-Spaceship >> addSpeed [
-	movementBySpeed := movementBySpeed + 1.
 ]
 
 { #category : #'as yet unclassified' }
@@ -80,13 +73,11 @@ Spaceship >> initializeWith: anId [
 	id := anId.
 	avaliableForMercenary := true.
 	mercenaries := OrderedCollection new.
-	movementBySpeed := 0.
-	position := 1.
-	shield := 3.
 	lapsCompleted := 0.
 	lockState := Unlock new.
 	cards := OrderedCollection new.
-	state := AvailableState create
+	state := AvailableState create.
+	physicalAttributes := PhysicalAttributes create.
 ]
 
 { #category : #testing }
@@ -117,12 +108,7 @@ Spaceship >> move: positionsToMoveByDices and: extraMovements [
 
 	lockState isSpaceshipLock
 		ifTrue: [ lockState saveDicesThrow: positionsToMoveByDices]
-		ifFalse: [ position := position + positionsToMoveByDices + extraMovements ]
-]
-
-{ #category : #accessing }
-Spaceship >> movementBySpeed [
-	^ movementBySpeed
+		ifFalse: [ physicalAttributes updatePosition:( positionsToMoveByDices + extraMovements) ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -140,23 +126,12 @@ Spaceship >> playTurn [
 { #category : #accessing }
 Spaceship >> position [
 
-	^ position
-]
-
-{ #category : #'as yet unclassified' }
-Spaceship >> recoverShields [
-
-	shield := 3
+	^ physicalAttributes getPosition.
 ]
 
 { #category : #removing }
 Spaceship >> removeMercenary: aSpaceship [ 
 	mercenaries remove: aSpaceship.
-]
-
-{ #category : #'as yet unclassified' }
-Spaceship >> removeSpeed [
-	movementBySpeed := movementBySpeed - 1.
 ]
 
 { #category : #removing }
@@ -170,9 +145,40 @@ Spaceship >> requestStateOfLocking [
 	^ lockState isSpaceshipLock.
 ]
 
+{ #category : #adding }
+Spaceship >> requestToAddSpeed [
+
+	physicalAttributes addSpeed.
+]
+
+{ #category : #accessing }
+Spaceship >> requestToMovementBySpeed [
+
+	^ physicalAttributes getMovementBySpeed.
+]
+
+{ #category : #'as yet unclassified' }
+Spaceship >> requestToRecoverShields [
+
+	physicalAttributes recoverShields.
+]
+
+{ #category : #'as yet unclassified' }
+Spaceship >> requestToRemoveSpeed [
+
+	physicalAttributes removeSpeed.
+]
+
+{ #category : #'as yet unclassified' }
+Spaceship >> requestToUpdateShield: amount [
+	
+	physicalAttributes updateShield: amount.
+]
+
 { #category : #accessing }
 Spaceship >> shield [
-	^ shield
+
+	^ physicalAttributes getShield.
 ]
 
 { #category : #accessing }
@@ -184,11 +190,6 @@ Spaceship >> state [
 Spaceship >> subtractLap [
 
 	lapsCompleted := lapsCompleted - 1
-]
-
-{ #category : #'as yet unclassified' }
-Spaceship >> updateShield: amount [
-	shield := shield + amount.
 ]
 
 { #category : #'as yet unclassified' }

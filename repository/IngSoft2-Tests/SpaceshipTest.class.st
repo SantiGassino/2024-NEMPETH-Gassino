@@ -37,7 +37,7 @@ SpaceshipTest >> test005WhenSpaceshipHasZeroShieldsThenChangeToUnavailableState 
 
 	| aSpaceship |
 	aSpaceship := Spaceship createWithId: 1.
-	aSpaceship updateShield: -3.
+	aSpaceship requestToUpdateShield: -3.
 
 
 	self deny: aSpaceship playTurn.
@@ -49,7 +49,7 @@ SpaceshipTest >> test006WhenSpaceshipIsUnavaliablePlayTwoTurnsThenSpaceshipIsAva
 
 	| aSpaceship |
 	aSpaceship := Spaceship createWithId: 1.
-	aSpaceship updateShield: -3.
+	aSpaceship requestToUpdateShield: -3.
 	
 	aSpaceship playTurn.
 	aSpaceship playTurn.

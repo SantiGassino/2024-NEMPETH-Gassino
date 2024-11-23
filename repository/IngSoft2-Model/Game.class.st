@@ -101,7 +101,7 @@ Game >> applySpeedWith: anIdOfSpaceship [
 	spaceshipsManager targetSpaceshipExistValidation: anIdOfSpaceship.
 	affectedSpaceship := spaceshipsManager getSpaceships detect: [ :aSpaceship |
 		                     aSpaceship id = anIdOfSpaceship ].
-	affectedSpaceship addSpeed.
+	affectedSpaceship requestToAddSpeed.
 	lastCardPlayed := Speed
 ]
 
@@ -133,7 +133,7 @@ Game >> passTurn [
 	| actualSpaceship |
 	
 	actualSpaceship := spaceshipsManager manageTurns.
-	actualSpaceship recoverShields.
+	actualSpaceship requestToRecoverShields.
 	
 	
 ]
@@ -166,7 +166,7 @@ Game >> playTurn [
 
 	actualSpaceship playTurn ifFalse: [ ^ self ].
 	actualSpaceship move: self throwDices and: movementByAcceleration
-		+ actualSpaceship movementBySpeed.
+		+ actualSpaceship requestToMovementBySpeed.
 
 	board normalizeOne: actualSpaceship.
 
@@ -213,7 +213,7 @@ Game >> removeSpeedWith: anIdOfSpaceship [
 	affectedSpaceship := spaceshipsManager getSpaceships detect: [ :aSpaceship |
 		                      aSpaceship id = anIdOfSpaceship ].
 	
-	affectedSpaceship removeSpeed. 
+	affectedSpaceship requestToRemoveSpeed. 
 ]
 
 { #category : #'as yet unclassified' }
