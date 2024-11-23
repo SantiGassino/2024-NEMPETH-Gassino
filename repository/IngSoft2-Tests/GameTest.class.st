@@ -2949,3 +2949,77 @@ GameTest >> test063WhenARedoCardIsPlayAndLastCardIsReverseCardThenThePositionsOf
 		equals: (OrderedCollection with: 1 with: 2 with: 3 with: 4).
 
 ]
+
+{ #category : #tests }
+GameTest >> test064WhenTwoSpaceshipsFallIntoJailBoxAndOneUseFreedomCardThenTheSecondSpaceshipCanUseRedoCardToReleaseItSelf [
+	| dices aDie cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aNormalBoxFive aPath aBoard aGame cardArguments aJailBox |
+	aDie := LoadedDie of: 10.
+	aDie add: (OrderedCollection with: 1).
+	dices := OrderedCollection with: aDie.
+
+	cards := {
+		         (1 -> Freedom).
+		         (2 -> Redo) } asDictionary.
+	aDeck := LoadedDeck createWith: cards.
+
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aNormalBoxFive := NormalBox new.
+	aJailBox := Jail createWith: dices.
+
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aJailBox
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour
+		         with: aNormalBoxFive.
+
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 3.
+
+	aGame playTurn.
+	aGame playTurn.
+	aGame playTurn.
+	aGame playTurn.
+
+	self
+		assert: aGame requestToCheckPositionsOfSpaceships
+		equals: (OrderedCollection with: 2 with: 2).
+		
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 1.
+	cardArguments at: 'idCardToUse' put: 1.
+	
+	aGame playCard: cardArguments.
+	aGame playTurn.
+	
+	self
+	assert: aGame requestToCheckPositionsOfSpaceships
+	equals: (OrderedCollection with: 3 with: 2).
+	
+	aGame playTurn.
+	aGame playTurn.
+	
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 2.
+	cardArguments at: 'idCardToUse' put: 4.
+	
+	aGame playCard: cardArguments.
+	aGame playTurn.
+	
+	self
+	assert: aGame requestToCheckPositionsOfSpaceships
+	equals: (OrderedCollection with: 4 with: 3).
+
+	
+
+
+]

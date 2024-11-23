@@ -46,6 +46,8 @@ PathGenerator >> initializeWith: aLength and: aRatio and: aDeck and: aCollection
 		randomValue := randomGenerator next.
 
 		randomValue <= 0.25 ifTrue: [ path add: NormalBox new ].
+		(randomValue > 0.24 and: [ randomValue <= 0.25 ]) ifTrue: [
+			path add: (Jail createWith: aCollectionOfDices) ].
 		(randomValue > 0.25 and: [ randomValue <= 0.3 ]) ifTrue: [
 			path add: (HyperGravity  createWith: aCollectionOfDices) ].
 		(randomValue > 0.3 and: [ randomValue <= 0.4 ]) ifTrue: [

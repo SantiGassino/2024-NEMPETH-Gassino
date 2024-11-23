@@ -31,7 +31,7 @@ PathGeneratorTest >> test001WhenPathIsCreateThenTheFisrtBoxisKindOfNormalBox [
 PathGeneratorTest >> test002VerifyCorrectDistributionsOfBoxes [
 
 	| aDeck aPathGenerator pathOfTheBoard percent normalBoxes cardBoxes blackHoleBoxes hyperSpaceJumpBoxes hypergravityBoxes
-	 moonwalkBoxes hyperJumpBoxes atomicBombBoxes aDices|
+	 moonwalkBoxes hyperJumpBoxes jailBoxes atomicBombBoxes aDices|
 	
 	aDeck := Deck create.
 	aDices := OrderedCollection with: (Die of: 3).
@@ -82,6 +82,11 @@ PathGeneratorTest >> test002VerifyCorrectDistributionsOfBoxes [
 	percent := hypergravityBoxes size/pathOfTheBoard size.
 	
 	self assert: ((percent) between: 0.03 and: 0.07).
+	
+	jailBoxes := pathOfTheBoard select: [ :box | box isKindOf: Jail ].
+	percent := jailBoxes size/pathOfTheBoard size.
+	
+	self assert: ((percent) between: 0 and: 0.02).
 
 ]
 
