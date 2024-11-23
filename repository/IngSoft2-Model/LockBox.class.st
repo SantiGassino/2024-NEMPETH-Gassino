@@ -2,7 +2,6 @@ Class {
 	#name : #LockBox,
 	#superclass : #Box,
 	#instVars : [
-		'prisioners',
 		'lockAmount'
 	],
 	#category : #'IngSoft2-Model'
@@ -24,19 +23,18 @@ LockBox >> applyEffect: spaceships and: actualSpaceship [
 { #category : #accessing }
 LockBox >> evaluateIncorporatePrisioner: aSpaceship [
 
-	((prisioners includes: aSpaceship) not and:
-		 aSpaceship getRequiredUnlockingAmount = -1) ifFalse: [ ^ self ].
-	prisioners add: aSpaceship.
-	aSpaceship setRequiredUnlockingAmount: lockAmount
+
+	(aSpaceship requestStateOfLocking) ifTrue: [ ^ self ].
+	
+	aSpaceship updateStateOfLocking: (Lock create).
 ]
 
 { #category : #accessing }
 LockBox >> evaluateReleasePrisioner: aSpaceship [
 
-	((prisioners includes: aSpaceship) and:
-		 aSpaceship getRequiredUnlockingAmount = -1) ifFalse: [ ^ self ].
+	(aSpaceship getAmountOfDicesRoll = lockAmount) ifFalse: [ ^ self ].
 		
-	prisioners remove: aSpaceship.
+	aSpaceship updateStateOfLocking: Unlock new.
 ]
 
 { #category : #'as yet unclassified' }

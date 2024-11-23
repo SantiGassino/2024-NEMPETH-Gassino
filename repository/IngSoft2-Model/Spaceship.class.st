@@ -11,7 +11,7 @@ Class {
 		'movementBySpeed',
 		'avaliableForMercenary',
 		'mercenaries',
-		'requiredUnlockingAmount'
+		'lockState'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -63,17 +63,10 @@ Spaceship >> changeTo: anState [
 	state := anState.
 ]
 
-{ #category : #accessing }
-Spaceship >> evaluateUpdateRequiredUnlockingAmount: positionsToMoveByDices [
-
-	requiredUnlockingAmount = positionsToMoveByDices ifTrue: [
-		requiredUnlockingAmount := -1 ]
-]
-
 { #category : #'as yet unclassified' }
-Spaceship >> getRequiredUnlockingAmount [
-
-	^ requiredUnlockingAmount 
+Spaceship >> getAmountOfDicesRoll [
+	
+	^ lockState getAmountOfDices.
 ]
 
 { #category : #accessing }
@@ -91,7 +84,7 @@ Spaceship >> initializeWith: anId [
 	position := 1.
 	shield := 3.
 	lapsCompleted := 0.
-	requiredUnlockingAmount := -1.
+	lockState := Unlock new.
 	cards := OrderedCollection new.
 	state := AvailableState create
 ]
@@ -122,10 +115,9 @@ Spaceship >> mercenaryAvailabilityValidation [
 { #category : #accessing }
 Spaceship >> move: positionsToMoveByDices and: extraMovements [
 
-	requiredUnlockingAmount = -1
-		ifTrue: [
-		position := position + positionsToMoveByDices + extraMovements ]
-		ifFalse: [ self evaluateUpdateRequiredUnlockingAmount: positionsToMoveByDices ]
+	lockState isSpaceshipLock
+		ifTrue: [ lockState saveDicesThrow: positionsToMoveByDices]
+		ifFalse: [ position := position + positionsToMoveByDices + extraMovements ]
 ]
 
 { #category : #accessing }
@@ -173,9 +165,9 @@ Spaceship >> removeThis: aCard [
 ]
 
 { #category : #'as yet unclassified' }
-Spaceship >> setRequiredUnlockingAmount: lockMount [ 
+Spaceship >> requestStateOfLocking [
 
-	requiredUnlockingAmount := lockMount.
+	^ lockState isSpaceshipLock.
 ]
 
 { #category : #accessing }
@@ -197,4 +189,10 @@ Spaceship >> subtractLap [
 { #category : #'as yet unclassified' }
 Spaceship >> updateShield: amount [
 	shield := shield + amount.
+]
+
+{ #category : #'as yet unclassified' }
+Spaceship >> updateStateOfLocking: aStateOfLock [
+
+	lockState := aStateOfLock.
 ]

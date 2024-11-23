@@ -56,7 +56,7 @@ Game >> applyFreedom: idOfSpaceship [
 
 	actualSpaceship := (spaceshipsManager getSpaceshipAtThisTurn).
 
-   actualSpaceship setRequiredUnlockingAmount: -1.
+   actualSpaceship updateStateOfLocking: Unlock new.
 ]
 
 { #category : #'as yet unclassified' }

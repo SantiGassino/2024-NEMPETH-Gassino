@@ -20,7 +20,6 @@ HyperGravity >> getLockAmount [
 HyperGravity >> initializeWith: dices [
 
 	lockAmount := (1 to: (self getMaxValueOfDices: dices)) atRandom.
-	prisioners := OrderedCollection new
 ]
 
 { #category : #initialization }

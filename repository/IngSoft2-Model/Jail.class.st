@@ -14,7 +14,6 @@ Jail class >> createWith: dices [
 Jail >> initializeWith: dices [
 	
 	lockAmount := self getMaxValueOfDices: dices.
-	prisioners := OrderedCollection new.
 	
 ]
 

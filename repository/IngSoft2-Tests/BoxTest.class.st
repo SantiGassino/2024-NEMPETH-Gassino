@@ -292,7 +292,9 @@ BoxTest >> test011WhenSpaceshipIsOnJailBoxObtainAmountOfRequiereDicesThenSpacesh
 	aJail applyEffect: spaceships and: actualSpaceship. 
 	
 	actualSpaceship move: 3 and: 3.
+	aJail applyEffect: spaceships and: actualSpaceship. 
 	actualSpaceship move: 6 and: 0.
+	aJail applyEffect: spaceships and: actualSpaceship. 
 	actualSpaceship move: 3 and: 0.
 	
 	self assert: actualSpaceship position equals: 4.	
