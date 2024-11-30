@@ -19,5 +19,5 @@ HyperGravity >> getLockAmount [
 { #category : #initialization }
 HyperGravity >> initializeWith: dices [
 
-	lockAmount := (1 to: (self getMaxValueOfDices: dices)) atRandom.
+	lockAmount := ((dices size) to: (self getMaxValueOfDices: dices)) atRandom.
 ]

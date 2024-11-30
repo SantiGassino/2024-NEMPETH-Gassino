@@ -9,3 +9,9 @@ LockState >> isSpaceshipLock [
 
 	^ self subclassResponsibility.
 ]
+
+{ #category : #'as yet unclassified' }
+LockState >> move: aSpaceship and: positionsToMoveByDices and: extraMovements [
+
+	^ self subclassResponsibility.
+]

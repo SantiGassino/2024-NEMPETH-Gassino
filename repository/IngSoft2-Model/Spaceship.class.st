@@ -106,9 +106,9 @@ Spaceship >> mercenaryAvailabilityValidation [
 { #category : #accessing }
 Spaceship >> move: positionsToMoveByDices and: extraMovements [
 
-	lockState isSpaceshipLock
-		ifTrue: [ lockState saveDicesThrow: positionsToMoveByDices]
-		ifFalse: [ physicalAttributes updatePosition:( positionsToMoveByDices + extraMovements) ].
+    lockState move: self and: positionsToMoveByDices and: extraMovements.
+
+
 		
 ]
 
@@ -174,6 +174,12 @@ Spaceship >> requestToRemoveSpeed [
 Spaceship >> requestToUpdateShield: amount [
 	
 	physicalAttributes updateShield: amount.
+]
+
+{ #category : #'as yet unclassified' }
+Spaceship >> requestUpdatePosition: positionsToMove [
+
+	physicalAttributes updatePosition: positionsToMove.
 ]
 
 { #category : #accessing }

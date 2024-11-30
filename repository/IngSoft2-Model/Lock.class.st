@@ -32,6 +32,12 @@ Lock >> isSpaceshipLock [
 ]
 
 { #category : #'as yet unclassified' }
+Lock >> move: aSpaceship and: positionsToMoveByDices and: extraMovements [
+
+    self saveDicesThrow: positionsToMoveByDices.
+]
+
+{ #category : #'as yet unclassified' }
 Lock >> saveDicesThrow: aDicesAmount [
 
 	dicesAmount := aDicesAmount.
