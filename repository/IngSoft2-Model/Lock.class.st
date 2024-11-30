@@ -14,12 +14,6 @@ Lock class >> create [
 ]
 
 { #category : #'as yet unclassified' }
-Lock >> getAmountOfDices [
-
-	^ dicesAmount.
-]
-
-{ #category : #'as yet unclassified' }
 Lock >> initializeWith [
 
 	dicesAmount := 0.

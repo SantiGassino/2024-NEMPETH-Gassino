@@ -57,9 +57,9 @@ Spaceship >> changeTo: anState [
 ]
 
 { #category : #'as yet unclassified' }
-Spaceship >> getAmountOfDicesRoll [
+Spaceship >> getLockState [
 	
-	^ lockState getAmountOfDices.
+	^ lockState.
 ]
 
 { #category : #accessing }

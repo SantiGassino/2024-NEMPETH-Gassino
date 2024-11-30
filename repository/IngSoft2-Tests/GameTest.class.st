@@ -2929,3 +2929,55 @@ GameTest >> test064WhenTwoSpaceshipsFallIntoJailBoxAndOneUseFreedomCardThenTheSe
 
 
 ]
+
+{ #category : #tests }
+GameTest >> test065WhenSpaceshipsUseFreedomCardAndNotInJailBoxThenItsLockStateNotChange [
+
+	| dices aDie cards aDeck aNormalBoxOne aNormalBoxTwo aNormalBoxThree aNormalBoxFour aHyperGravitybox aPath aBoard aGame cardArguments |
+	
+	aDie := LoadedDie of: 4.
+	aDie add: (OrderedCollection with: 1 with: 2).
+	dices := OrderedCollection with: aDie.
+	cards := { (1 -> Freedom). } asDictionary.
+	aDeck := LoadedDeck createWith: cards.
+	
+	aNormalBoxOne := NormalBox new.
+	aNormalBoxTwo := NormalBox new.
+	aNormalBoxThree := NormalBox new.
+	aNormalBoxFour := NormalBox new.
+	aHyperGravitybox := HyperGravity createWith: dices.
+	
+	aPath := OrderedCollection
+		         with: aNormalBoxOne
+		         with: aHyperGravitybox
+		         with: aNormalBoxTwo
+		         with: aNormalBoxThree
+		         with: aNormalBoxFour.
+	aBoard := Board createWith: aPath.
+	aGame := Game
+		         createWithNumberOfSpaceships: 2
+		         and: dices
+		         and: aDeck
+		         and: aBoard
+		         andLapsToWin: 3.
+
+	aGame playTurn.
+
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 1.
+	cardArguments at: 'idCardToUse' put: 1.
+	
+	aGame playCard: cardArguments.
+	
+	self assert: ((aGame getLockStateofSpaceshipAtId: 1) isKindOf: Lock).
+	
+	aGame playTurn.
+	
+	cardArguments := Dictionary new.
+	cardArguments at: 'idSpaceship' put: 2.
+	cardArguments at: 'idCardToUse' put: 3.
+	
+	aGame playCard: cardArguments.
+	
+	self assert: ((aGame getLockStateofSpaceshipAtId: 2) isKindOf: Unlock).
+]

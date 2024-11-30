@@ -111,6 +111,18 @@ Game >> getLastCardPlayed [
 ]
 
 { #category : #'as yet unclassified' }
+Game >> getLockStateofSpaceshipAtId: idOfSpaceship [
+	
+	| spaceship |
+	
+	spaceship := spaceshipsManager getSpaceships detect: [ :aSpaceship | aSpaceship id = idOfSpaceship ].
+	
+	^ spaceship getLockState.
+	
+	
+]
+
+{ #category : #'as yet unclassified' }
 Game >> getPermanentCardPlayed [
 	^ permanentCardsPlayed
 ]
