@@ -9,8 +9,3 @@ NormalBox >> applyEffect: spaceships and: actualSpaceship [
 
 	^ self
 ]
-
-{ #category : #'as yet unclassified' }
-NormalBox >> isLockType [
-	^ false
-]

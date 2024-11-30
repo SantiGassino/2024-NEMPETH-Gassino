@@ -174,15 +174,6 @@ SpaceshipManager >> targetSpaceshipExistValidation: anIdOfSpaceship [
 		Error signal: 'The target spaceship does not exist' ]
 ]
 
-{ #category : #'as yet unclassified' }
-SpaceshipManager >> validationSpaceshipIdAtThisTurnIs: idOfSpaceship [ 
-
-	(self getIdOfSpaceshipAtTurn = idOfSpaceship)
-		ifFalse: [
-			Error signal:
-				'A ship is attempting to play a freedom card when it is not its turn' ]
-]
-
 { #category : #accessing }
 SpaceshipManager >> verifyBattleWith: actualSpaceship and: aGame [
 

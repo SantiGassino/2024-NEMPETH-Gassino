@@ -9,8 +9,3 @@ BlackHole >> applyEffect: spaceships and: actualSpaceship [
 
 	actualSpaceship move: 0 and: -4.
 ]
-
-{ #category : #accessing }
-BlackHole >> isLockType [
-	^ false
-]

@@ -25,8 +25,3 @@ MoonWalk >> initializeWith: boxesToMoveBackward [
 
 	boxesToMove := boxesToMoveBackward.
 ]
-
-{ #category : #accessing }
-MoonWalk >> isLockType [
-	^ false
-]

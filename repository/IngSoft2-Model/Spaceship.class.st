@@ -108,7 +108,8 @@ Spaceship >> move: positionsToMoveByDices and: extraMovements [
 
 	lockState isSpaceshipLock
 		ifTrue: [ lockState saveDicesThrow: positionsToMoveByDices]
-		ifFalse: [ physicalAttributes updatePosition:( positionsToMoveByDices + extraMovements) ]
+		ifFalse: [ physicalAttributes updatePosition:( positionsToMoveByDices + extraMovements) ].
+		
 ]
 
 { #category : #'as yet unclassified' }

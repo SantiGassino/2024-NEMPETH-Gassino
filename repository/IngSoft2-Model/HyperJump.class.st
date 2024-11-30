@@ -53,11 +53,6 @@ HyperJump >> initializeWith: boardLength and: aRatio [
 ]
 
 { #category : #'as yet unclassified' }
-HyperJump >> isLockType [
-	^ false
-]
-
-{ #category : #'as yet unclassified' }
 HyperJump >> units [
 	^ collectionOfUnits.
 ]

@@ -17,8 +17,8 @@ Jail >> initializeWith: dices [
 	
 ]
 
-{ #category : #initialization }
-Jail >> isUnlockableByFreedomCard [
+{ #category : #accessing }
+Jail >> release: aSpaceship [
 
-	^ true
+	aSpaceship updateStateOfLocking: Unlock new.
 ]

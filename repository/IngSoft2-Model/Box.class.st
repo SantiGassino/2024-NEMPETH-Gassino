@@ -16,7 +16,7 @@ Box >> applyEffect: spaceships and: actualSpaceship [
 { #category : #accessing }
 Box >> isLockType [
 
-	self subclassResponsibility.
+	^ false.
 ]
 
 { #category : #accessing }
@@ -29,4 +29,12 @@ Box >> position [
 Box >> position: aPosition [
 
 	position := aPosition
+]
+
+{ #category : #accessing }
+Box >> release: aSpaceship [
+
+	^ self.
+
+	
 ]

@@ -25,9 +25,3 @@ CardBox >> applyEffect: spaceships and: actualSpaceship [
 CardBox >> initializeWith: aDeck [ 
 	deck := aDeck
 ]
-
-{ #category : #accessing }
-CardBox >> isLockType [
-
-	^ false
-]

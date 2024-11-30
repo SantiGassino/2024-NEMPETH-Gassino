@@ -21,9 +21,3 @@ HyperGravity >> initializeWith: dices [
 
 	lockAmount := (1 to: (self getMaxValueOfDices: dices)) atRandom.
 ]
-
-{ #category : #initialization }
-HyperGravity >> isUnlockableByFreedomCard [
-	
-	^ false
-]

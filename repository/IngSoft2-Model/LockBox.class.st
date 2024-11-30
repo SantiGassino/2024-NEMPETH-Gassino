@@ -57,9 +57,3 @@ LockBox >> isLockType [
 
 	^ true
 ]
-
-{ #category : #initialization }
-LockBox >> isUnlockableByFreedomCard [
-	
-	^self subclassResponsibility.
-]

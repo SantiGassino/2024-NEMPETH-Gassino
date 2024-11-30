@@ -50,14 +50,14 @@ Game >> addPermanentCardPlayed: aCard [
 { #category : #'as yet unclassified' }
 Game >> applyFreedom: idOfSpaceship [
 	
-	| actualSpaceship |
-	spaceshipsManager validationSpaceshipIdAtThisTurnIs: idOfSpaceship.
-	board validationOfJailBoxAt: ((spaceshipsManager getSpaceshipAtThisTurn) position).
+	| spaceship spaceshipBox|
+	
+	spaceship :=  (spaceshipsManager getSpaceships detect: [ :aSpaceship | aSpaceship id = idOfSpaceship ]).
 
-	actualSpaceship := (spaceshipsManager getSpaceshipAtThisTurn).
-
-   actualSpaceship updateStateOfLocking: Unlock new.
-
+	spaceshipBox := board findBoxIn: spaceship position.
+	spaceshipBox release: spaceship.
+	
+	
 	lastCardPlayed := Freedom.
 ]
 
