@@ -319,5 +319,5 @@ BoxTest >> test012WhenAHyperGravityBoxIsCreateThenHisLockMountIsBetweenOneAndMax
 	
 	aHyperGravity applyEffect: spaceships and: actualSpaceship. 
 	
-	self assert: ((aHyperGravity getLockAmount) between: 1 and: 7).
+	self assert: ((aHyperGravity getLockAmount) between: 2 and: 7).
 ]

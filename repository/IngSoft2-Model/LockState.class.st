@@ -4,14 +4,14 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #testing }
-LockState >> isSpaceshipLock [ 
+{ #category : #'as yet unclassified' }
+LockState >> move: aSpaceship and: positionsToMoveByDices and: extraMovements [
 
 	^ self subclassResponsibility.
 ]
 
 { #category : #'as yet unclassified' }
-LockState >> move: aSpaceship and: positionsToMoveByDices and: extraMovements [
+LockState >> updateStateOfLocking: lockAmount [
 
 	^ self subclassResponsibility.
 ]

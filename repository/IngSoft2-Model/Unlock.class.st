@@ -4,14 +4,14 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #testing }
-Unlock >> isSpaceshipLock [ 
-
-	^ false.
-]
-
 { #category : #'as yet unclassified' }
 Unlock >> move: aSpaceship and: positionsToMoveByDices and: extraMovements [
 
 	 aSpaceship requestUpdatePosition: positionsToMoveByDices + extraMovements.
+]
+
+{ #category : #'as yet unclassified' }
+Unlock >> updateStateOfLocking: lockAmount [
+
+	^ Lock create. 
 ]

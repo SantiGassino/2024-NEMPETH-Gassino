@@ -140,12 +140,6 @@ Spaceship >> removeThis: aCard [
 	self cards remove: aCard.
 ]
 
-{ #category : #'as yet unclassified' }
-Spaceship >> requestStateOfLocking [
-
-	^ lockState isSpaceshipLock.
-]
-
 { #category : #adding }
 Spaceship >> requestToAddSpeed [
 
@@ -180,6 +174,12 @@ Spaceship >> requestToUpdateShield: amount [
 Spaceship >> requestUpdatePosition: positionsToMove [
 
 	physicalAttributes updatePosition: positionsToMove.
+]
+
+{ #category : #'as yet unclassified' }
+Spaceship >> requestUpdateStateOfLocking: lockAmount [
+	
+	lockState := lockState updateStateOfLocking: lockAmount.
 ]
 
 { #category : #accessing }

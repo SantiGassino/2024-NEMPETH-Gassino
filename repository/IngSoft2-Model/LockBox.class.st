@@ -16,25 +16,13 @@ LockBox class >> createWith: values [
 { #category : #accessing }
 LockBox >> applyEffect: spaceships and: actualSpaceship [
 
-	self evaluateIncorporatePrisioner: actualSpaceship.
-	self evaluateReleasePrisioner: actualSpaceship.
+	self evaluatePrisioner: actualSpaceship.
 ]
 
 { #category : #accessing }
-LockBox >> evaluateIncorporatePrisioner: aSpaceship [
+LockBox >> evaluatePrisioner: aSpaceship [
 
-
-	(aSpaceship requestStateOfLocking) ifTrue: [ ^ self ].
-	
-	aSpaceship updateStateOfLocking: (Lock create).
-]
-
-{ #category : #accessing }
-LockBox >> evaluateReleasePrisioner: aSpaceship [
-
-	(aSpaceship getAmountOfDicesRoll = lockAmount) ifFalse: [ ^ self ].
-		
-	aSpaceship updateStateOfLocking: Unlock new.
+	aSpaceship requestUpdateStateOfLocking: lockAmount.
 ]
 
 { #category : #'as yet unclassified' }

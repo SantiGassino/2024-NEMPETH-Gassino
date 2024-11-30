@@ -26,12 +26,6 @@ Lock >> initializeWith [
 ]
 
 { #category : #'as yet unclassified' }
-Lock >> isSpaceshipLock [
-
-	^ true.
-]
-
-{ #category : #'as yet unclassified' }
 Lock >> move: aSpaceship and: positionsToMoveByDices and: extraMovements [
 
     self saveDicesThrow: positionsToMoveByDices.
@@ -41,4 +35,12 @@ Lock >> move: aSpaceship and: positionsToMoveByDices and: extraMovements [
 Lock >> saveDicesThrow: aDicesAmount [
 
 	dicesAmount := aDicesAmount.
+]
+
+{ #category : #'as yet unclassified' }
+Lock >> updateStateOfLocking: lockAmount [
+
+	(dicesAmount = lockAmount) ifTrue:[ ^ Unlock new. ].
+		
+	^ self.
 ]
