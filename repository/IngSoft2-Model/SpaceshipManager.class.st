@@ -166,6 +166,7 @@ SpaceshipManager >> targetSpaceshipExistValidation: anIdOfSpaceship [
 SpaceshipManager >> verifyBattleWith: actualSpaceship and: aGame [
 
 	| spaceshipsToFight sumOfThrowsActualSpaceship sumOfThrowsCounterSpaceship counterSpaceship |
+	
 	actualSpaceship position = 1 ifTrue: [ ^ aGame ].
 	
 	sumOfThrowsActualSpaceship := 0.

@@ -190,7 +190,7 @@ Game >> playTurn [
 	winner := spaceshipsManager checkWinner.
 	winner ifNotNil: [ ^ self ].
 	
-	(boxToCheck isLockType) ifFalse: [ spaceshipsManager verifyBattleWith: actualSpaceship and: self. ]
+	boxToCheck evaluateBattle: spaceshipsManager and: actualSpaceship and: self.
 
 	
 ]

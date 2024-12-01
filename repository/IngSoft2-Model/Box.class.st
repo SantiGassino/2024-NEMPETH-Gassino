@@ -14,9 +14,15 @@ Box >> applyEffect: spaceships and: actualSpaceship [
 ]
 
 { #category : #accessing }
-Box >> isLockType [
+Box >> evaluateBattle: aSpaceshipManager and: actualSpaceship and: aGame [
 
-	^ false.
+	aSpaceshipManager verifyBattleWith: actualSpaceship and: aGame.
+]
+
+{ #category : #'as yet unclassified' }
+Box >> getActualEffect [
+
+	^ self
 ]
 
 { #category : #accessing }

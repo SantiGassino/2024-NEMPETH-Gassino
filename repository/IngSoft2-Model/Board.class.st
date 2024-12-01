@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'path',
-		'lastBox'
+		'lastBoxEffect'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -28,8 +28,8 @@ Board >> findBoxIn: aPosition [
 
 	| actualBox |
 	actualBox := path at: aPosition.
-
-	actualBox isLockType ifFalse: [ lastBox := actualBox ].
+	
+	lastBoxEffect := actualBox getActualEffect.
 
 	^ actualBox
 ]
@@ -37,14 +37,14 @@ Board >> findBoxIn: aPosition [
 { #category : #'as yet unclassified' }
 Board >> getLastBox [
 
-	^ lastBox
+	^ lastBoxEffect
 ]
 
 { #category : #initialization }
 Board >> initializeWith: aPath [
 	
 	path := aPath.
-	lastBox := NormalBox new.
+	lastBoxEffect := NormalBox new.
 	path withIndexDo: [ :box :index | box position: index ].
 ]
 

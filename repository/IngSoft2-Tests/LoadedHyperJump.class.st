@@ -33,6 +33,18 @@ LoadedHyperJump >> applyEffect: spaceships and: affectedSpaceship [
 	index := index + 1
 ]
 
+{ #category : #accessing }
+LoadedHyperJump >> evaluateBattle: aSpaceshipManager and: actualSpaceship and: aGame [
+
+	aSpaceshipManager verifyBattleWith: actualSpaceship and: aGame.
+]
+
+{ #category : #'as yet unclassified' }
+LoadedHyperJump >> getActualEffect [ 
+	
+	^ self
+]
+
 { #category : #initialization }
 LoadedHyperJump >> initializeWith: listLength and: aRatio [
 

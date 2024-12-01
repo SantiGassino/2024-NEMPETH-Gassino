@@ -20,9 +20,21 @@ LockBox >> applyEffect: spaceships and: actualSpaceship [
 ]
 
 { #category : #accessing }
+LockBox >> evaluateBattle: aSpaceshipManager and: actualSpaceship and: aGame [
+
+	^ aGame.
+]
+
+{ #category : #accessing }
 LockBox >> evaluatePrisioner: aSpaceship [
 
 	aSpaceship requestUpdateStateOfLocking: lockAmount.
+]
+
+{ #category : #'as yet unclassified' }
+LockBox >> getActualEffect [ 
+
+	^ NormalBox new.
 ]
 
 { #category : #'as yet unclassified' }
@@ -38,10 +50,4 @@ LockBox >> getMaxValueOfDices: dices [
 LockBox >> initializeWith: value [
 	
 	^self subclassResponsibility.
-]
-
-{ #category : #'as yet unclassified' }
-LockBox >> isLockType [
-
-	^ true
 ]
