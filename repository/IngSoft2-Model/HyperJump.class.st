@@ -18,8 +18,7 @@ HyperJump class >> createWith: listLength andParsecsToBoxesRatio: aRatio [
 { #category : #accessing }
 HyperJump >> applyEffect: spaceships and: actualSpaceship [
 
-	actualSpaceship move:
-		(collectionOfUnits  at: index) toParsec // parsecsToBoxesRatio.
+	actualSpaceship move: 0 and: (collectionOfUnits  at: index) toParsec // parsecsToBoxesRatio.
 
 	index = collectionOfUnits size ifTrue: [ index := 0 ].
 

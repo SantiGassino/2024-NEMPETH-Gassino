@@ -12,7 +12,7 @@ PathGeneratorTest >> should: anErrorBlock raise: anErrorClass withMessage: anErr
 { #category : #running }
 PathGeneratorTest >> test001WhenPathIsCreateThenTheFisrtBoxisKindOfNormalBox [
 
-	| aPathGenerator cards aDeck |
+	| aPathGenerator cards aDeck aDices |
 	
 	cards := {
         1 -> Acceleration.
@@ -20,7 +20,9 @@ PathGeneratorTest >> test001WhenPathIsCreateThenTheFisrtBoxisKindOfNormalBox [
     } asDictionary.
 	aDeck := LoadedDeck createWith: cards.
 	
-	aPathGenerator := PathGenerator createWith: 10 and: 5 and: aDeck.
+	aDices := OrderedCollection with: (Die of: 3).
+	
+	aPathGenerator := PathGenerator createWith: 10 and: 5 and: aDeck and: aDices.
 	
 	self assert: (((aPathGenerator path) at: 1) isKindOf: NormalBox).
 ]
@@ -28,19 +30,20 @@ PathGeneratorTest >> test001WhenPathIsCreateThenTheFisrtBoxisKindOfNormalBox [
 { #category : #running }
 PathGeneratorTest >> test002VerifyCorrectDistributionsOfBoxes [
 
-	| aDeck aPathGenerator pathOfTheBoard percent normalBoxes cardBoxes blackHoleBoxes hyperSpaceJumpBoxes 
-	 moonwalkBoxes hyperJumpBoxes atomicBombBoxes |
+	| aDeck aPathGenerator pathOfTheBoard percent normalBoxes cardBoxes blackHoleBoxes hyperSpaceJumpBoxes hypergravityBoxes
+	 moonwalkBoxes hyperJumpBoxes jailBoxes atomicBombBoxes aDices|
 	
 	aDeck := Deck create.
+	aDices := OrderedCollection with: (Die of: 3).
 	
-	aPathGenerator := PathGenerator createWith: 7500 and: 5 and: aDeck.
+	aPathGenerator := PathGenerator createWith: 7500 and: 5 and: aDeck and: aDices.
 	
 	pathOfTheBoard := aPathGenerator path.
 
 	normalBoxes := pathOfTheBoard select: [ :box | box isKindOf: NormalBox ].
 	percent := normalBoxes size/pathOfTheBoard size.
 	
-	self assert: ((percent) between:  0.25 and: 0.35).
+	self assert: ((percent) between:  0.20 and: 0.30).
 	
 	cardBoxes := pathOfTheBoard select: [ :box | box isKindOf: CardBox ].
 	percent := cardBoxes size/pathOfTheBoard size.
@@ -74,21 +77,32 @@ PathGeneratorTest >> test002VerifyCorrectDistributionsOfBoxes [
 	percent := atomicBombBoxes size/pathOfTheBoard size.
 	
 	self assert: ((percent) between: 0 and: 0.07).
+	
+	hypergravityBoxes := pathOfTheBoard select: [ :box | box isKindOf: HyperGravity ].
+	percent := hypergravityBoxes size/pathOfTheBoard size.
+	
+	self assert: ((percent) between: 0.03 and: 0.07).
+	
+	jailBoxes := pathOfTheBoard select: [ :box | box isKindOf: Jail ].
+	percent := jailBoxes size/pathOfTheBoard size.
+	
+	self assert: ((percent) between: 0 and: 0.02).
 
 ]
 
 { #category : #running }
 PathGeneratorTest >> test003WhenRatioParsecToBoxesIsEqualOrLessThanZeroThenThorwError [
 	
-	| cards aDeck |
+	| cards aDeck aDices|
 	cards := {
         1 -> Acceleration.
         2 -> Speed.
     } asDictionary.
 	aDeck := LoadedDeck createWith: cards.
+	aDices := OrderedCollection with: (Die of: 3).
 	
 	self
-		should: [ PathGenerator createWith: 50 and: 0 and: aDeck. ]
+		should: [ PathGenerator createWith: 50 and: 0 and: aDeck and: aDices. ]
 		raise: Error
 		withMessage: 'Parsec to boxes ratio should be greater that zero'
 ]

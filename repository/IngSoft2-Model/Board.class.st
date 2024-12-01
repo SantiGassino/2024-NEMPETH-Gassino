@@ -2,7 +2,8 @@ Class {
 	#name : #Board,
 	#superclass : #Object,
 	#instVars : [
-		'path'
+		'path',
+		'lastBoxEffect'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -23,15 +24,27 @@ Board class >> lengthValidation: aPath [
 ]
 
 { #category : #'as yet unclassified' }
-Board >> findBoxIn:  aPosition [
+Board >> findBoxIn: aPosition [
 
-	^ path at: aPosition
+	| actualBox |
+	actualBox := path at: aPosition.
+	
+	lastBoxEffect := actualBox getActualEffect.
+
+	^ actualBox
+]
+
+{ #category : #'as yet unclassified' }
+Board >> getLastBox [
+
+	^ lastBoxEffect
 ]
 
 { #category : #initialization }
 Board >> initializeWith: aPath [
 	
 	path := aPath.
+	lastBoxEffect := NormalBox new.
 	path withIndexDo: [ :box :index | box position: index ].
 ]
 
@@ -53,7 +66,7 @@ Board >> normalizeBackwards: spaceships [
 
 	spaceships do: [ :aSpaceship |
 		aSpaceship position < 1 ifTrue: [
-			aSpaceship move: self length.
+			aSpaceship move: 0 and: self length.
 			aSpaceship subtractLap ] ]
 	
 ]
@@ -63,7 +76,7 @@ Board >> normalizeFirstBox: spaceships [
 
 	spaceships do: [ :aSpaceship |
 		(aSpaceship lapsCompleted = 0 and: aSpaceship position < 1) ifTrue: [
-			aSpaceship move: -1 * aSpaceship position + 1 ] ]
+			aSpaceship move: 0 and: -1 * aSpaceship position + 1 ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -71,7 +84,7 @@ Board >> normalizeForwards: spaceships [
 
 	spaceships do: [ :aSpaceship |
 		[ aSpaceship position > self length ] whileTrue: [
-			aSpaceship move: -1 * self length.
+			aSpaceship move: 0 and: -1 * self length.
 			aSpaceship addLap ] ]
 ]
 
@@ -79,6 +92,6 @@ Board >> normalizeForwards: spaceships [
 Board >> normalizeOne: aSpaceship [
 
 	[ aSpaceship position > self length ] whileTrue: [
-		aSpaceship move: -1 * self length.
+		aSpaceship move: 0 and: -1 * self length.
 		aSpaceship addLap ]
 ]

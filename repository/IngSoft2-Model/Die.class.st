@@ -15,6 +15,12 @@ Die class >> of: aNumberOfFaces [
 	^ self new initializeOf: aNumberOfFaces
 ]
 
+{ #category : #'as yet unclassified' }
+Die >> getFaces [
+	
+	^ faces.
+]
+
 { #category : #initialization }
 Die >> initializeOf: aNumberOfFaces [
 	faces := aNumberOfFaces.

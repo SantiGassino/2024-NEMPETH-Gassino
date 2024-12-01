@@ -10,7 +10,7 @@ Class {
 { #category : #'as yet unclassified' }
 Wormhole >> applyEffect: spaceships and: actualSpaceship [
 
-	actualSpaceship move: wormholeEnd position - self position.
+	actualSpaceship move: 0 and: wormholeEnd position - self position.
 ]
 
 { #category : #'as yet unclassified' }

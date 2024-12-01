@@ -24,6 +24,12 @@ LoadedDie >> add: aSequence [
 	index := 1
 ]
 
+{ #category : #accessing }
+LoadedDie >> getFaces [
+
+	^ faces.
+]
+
 { #category : #initialization }
 LoadedDie >> initializeOf: aNumberOfFaces [
 	faces := aNumberOfFaces.

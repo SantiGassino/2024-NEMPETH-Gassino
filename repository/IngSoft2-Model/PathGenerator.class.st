@@ -8,11 +8,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-PathGenerator class >> createWith: aLength and: aRatio and: aDeck [ 
+PathGenerator class >> createWith: aLength and: aRatio and: aDeck and: aCollectionOfDices [
 	
 	self ratioValidation: aRatio.
 
-	^ self new initializeWith: aLength and: aRatio and: aDeck
+	^ self new initializeWith: aLength and: aRatio and: aDeck and: aCollectionOfDices
 ]
 
 { #category : #'as yet unclassified' }
@@ -37,7 +37,7 @@ PathGenerator >> createWormhole [
 ]
 
 { #category : #initialization }
-PathGenerator >> initializeWith: aLength and: aRatio and: aDeck [ 
+PathGenerator >> initializeWith: aLength and: aRatio and: aDeck and: aCollectionOfDices [
 	| randomGenerator randomValue |
 	path := OrderedCollection new.
 	randomGenerator := Random new.
@@ -45,7 +45,11 @@ PathGenerator >> initializeWith: aLength and: aRatio and: aDeck [
 	1 to: aLength - 3 do: [ :i |
 		randomValue := randomGenerator next.
 
-		randomValue <= 0.3 ifTrue: [ path add: NormalBox new ].
+		randomValue <= 0.25 ifTrue: [ path add: NormalBox new ].
+		(randomValue > 0.24 and: [ randomValue <= 0.25 ]) ifTrue: [
+			path add: (Jail createWith: aCollectionOfDices) ].
+		(randomValue > 0.25 and: [ randomValue <= 0.3 ]) ifTrue: [
+			path add: (HyperGravity  createWith: aCollectionOfDices) ].
 		(randomValue > 0.3 and: [ randomValue <= 0.4 ]) ifTrue: [
 			path add: (CardBox createWith: aDeck) ].
 		(randomValue > 0.4 and: [ randomValue <= 0.6 ]) ifTrue: [
